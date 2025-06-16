@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Futuristic Login/Signup</title>
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    @font-face {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 400;
+      src: url(https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJfecg.woff2) format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 600;
+      src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2) format('woff2');
+    }
+
+    body {
+      background-color: #111827;
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Particle Background */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Main Container */
+    .container {
+      position: relative;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    /* Auth Card */
+    .auth-card {
+      background: rgba(31, 41, 55, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      overflow: hidden;
+      height: 750px;
+      width: 450px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      position: relative;
+    }
+
+    .auth-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 1rem;
+      padding: 2px;
+      background: linear-gradient(45deg, #06b6d4, #8b5cf6);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0.3;
+      animation: borderAnimation 8s linear infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes borderAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .auth-content {
+      padding: 2rem;
+      position: relative;
+    }
+
+    /* Toggle Switch */
+    .auth-toggle {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .toggle-bg {
+      background-color: #374151;
+      border-radius: 9999px;
+      padding: 0.25rem;
+      display: flex;
+      position: relative;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      background: linear-gradient(to right, #06b6d4, #3b82f6);
+      top: 0.25rem;
+      left: 0.25rem;
+      height: calc(100% - 0.5rem);
+      width: 50%;
+      border-radius: 9999px;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-btn {
+      position: relative;
+      z-index: 1;
+      padding: 0.5rem 1.5rem;
+      border: none;
+      background: transparent;
+      color: #d1d5db;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .toggle-btn.active {
+      color: #111827;
+    }
+
+    /* Mascot */
+    .mascot-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .mascot {
+      width: 5rem;
+      height: 5rem;
+      position: relative;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-0.5rem); }
+    }
+
+    .mascot-glow {
+      position: absolute;
+      inset: 0;
+      background-color: #06b6d4;
+      border-radius: 50%;
+      filter: blur(12px);
+      opacity: 0.2;
+    }
+
+    .mascot-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mascot-svg {
+      width: 4rem;
+      height: 4rem;
+    }
+
+    /* Form Styles */
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #9ca3af;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-input {
+      width: 100%;
+      background: rgba(55, 65, 81, 0.5);
+      border: none;
+      border-bottom: 2px solid #4b5563;
+      color: #fff;
+      padding: 0.5rem 0;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-bottom-color: #06b6d4;
+    }
+
+    .input-underline {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background-color: #06b6d4;
+      width: 0;
+      transition: width 0.3s;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 0;
+      bottom: 0.5rem;
+      background: none;
+      border: none;
+      color: #9ca3af;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .password-toggle:hover {
+      color: #06b6d4;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .checkbox-input {
+      width: 1rem;
+      height: 1rem;
+      accent-color: #06b6d4;
+      margin-right: 0.5rem;
+    }
+
+    .checkbox-label {
+      font-size: 0.875rem;
+      color: #d1d5db;
+    }
+
+    .checkbox-label a {
+      color: #06b6d4;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .checkbox-label a:hover {
+      color: #0891b2;
+    }
+
+    /* Buttons */
+    .auth-btn {
+      width: 100%;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .login-btn {
+      background: linear-gradient(to right, #06b6d4, #3b82f6);
+      color: white;
+      box-shadow: 0 4px 6px -1px rgba(6, 182, 212, 0.2), 0 2px 4px -1px rgba(6, 182, 212, 0.1);
+    }
+
+    .signup-btn {
+      background: linear-gradient(to right, #8b5cf6, #06b6d4);
+      color: white;
+      margin-top: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.2), 0 2px 4px -1px rgba(139, 92, 246, 0.1);
+    }
+
+    .auth-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.3), 0 4px 6px -2px rgba(6, 182, 212, 0.1);
+    }
+
+    .auth-btn:active {
+      transform: translateY(0);
+    }
+
+    .auth-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: -1;
+    }
+
+    .auth-btn:hover::after {
+      opacity: 1;
+    }
+
+    /* Footer Link */
+    .auth-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+      color: #9ca3af;
+    }
+
+    .auth-footer a {
+      color: #06b6d4;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .auth-footer a:hover {
+      color: #0891b2;
+    }
+
+    /* Form Transitions */
+    .form-container {
+      position: relative;
+      min-height: 400px;
+    }
+
+    .form-page {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .form-page.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .auth-content {
+        padding: 1.5rem;
+      }
+      
+      .toggle-btn {
+        padding: 0.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particle-canvas"></canvas>
+  
+  <div class="container">
+    <div class="auth-card">
+      <div class="auth-content">
+        <div class="auth-toggle">
+          <div class="toggle-bg">
+            <div class="toggle-slider" id="toggle-slider"></div>
+            <button class="toggle-btn active" id="login-toggle">Login</button>
+            <button class="toggle-btn" id="signup-toggle">Sign Up</button>
+          </div>
+        </div>
+        
+        <div class="mascot-container">
+          <div class="mascot">
+            <div class="mascot-glow"></div>
+            <div class="mascot-face">
+              <svg class="mascot-svg" viewBox="0 0 100 100" id="mascot-svg">
+                <circle cx="50" cy="50" r="40" fill="#06b6d4" />
+                <circle cx="35" cy="40" r="5" fill="white" />
+                <circle cx="65" cy="40" r="5" fill="white" />
+                <circle id="left-pupil" cx="35" cy="40" r="2" fill="black" />
+                <circle id="right-pupil" cx="65" cy="40" r="2" fill="black" />
+                <path id="mouth" d="M35,65 Q50,65 65,65" stroke="white" stroke-width="3" fill="none" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-container">
+          <!-- Login Form -->
+          <form class="auth-form form-page active" id="login-form">
+            <div class="form-group">
+              <label class="form-label" for="login-email">Email</label>
+              <input class="form-input" type="email" id="login-email" placeholder="your@email.com">
+              <div class="input-underline" id="login-email-underline"></div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="login-password">Password</label>
+              <input class="form-input" type="password" id="login-password" placeholder="••••••••">
+              <button type="button" class="password-toggle" id="login-password-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                </svg>
+              </button>
+              <div class="input-underline" id="login-password-underline"></div>
+            </div>
+            
+            <div class="checkbox-group">
+              <input type="checkbox" id="remember-me" class="checkbox-input">
+              <label for="remember-me" class="checkbox-label">Remember me</label>
+            </div>
+            
+            <button type="submit" class="auth-btn login-btn">Login</button>
+          </form>
+          
+          <!-- Signup Form -->
+          <form class="auth-form form-page" id="signup-form">
+            <div class="form-group">
+              <label class="form-label" for="signup-name">Full Name</label>
+              <input class="form-input" type="text" id="signup-name" placeholder="John Doe">
+              <div class="input-underline" id="signup-name-underline"></div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="signup-email">Email</label>
+              <input class="form-input" type="email" id="signup-email" placeholder="your@email.com">
+              <div class="input-underline" id="signup-email-underline"></div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="signup-password">Password</label>
+              <input class="form-input" type="password" id="signup-password" placeholder="••••••••">
+              <button type="button" class="password-toggle" id="signup-password-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                </svg>
+              </button>
+              <div class="input-underline" id="signup-password-underline"></div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="signup-confirm-password">Confirm Password</label>
+              <input class="form-input" type="password" id="signup-confirm-password" placeholder="••••••••">
+              <button type="button" class="password-toggle" id="signup-confirm-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                </svg>
+              </button>
+              <div class="input-underline" id="signup-confirm-underline"></div>
+            </div>
+            
+            <div class="checkbox-group">
+              <input type="checkbox" id="terms" class="checkbox-input">
+              <label for="terms" class="checkbox-label">I agree to the <a href="#">Terms & Conditions</a></label>
+            </div>
+            
+            <button type="submit" class="auth-btn signup-btn">Sign Up</button>
+          </form>
+        </div>
+        
+        <div class="auth-footer">
+          <p id="footer-text">Don't have an account? <a href="#" id="switch-link">Sign up</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Particle Background
+      const canvas = document.getElementById('particle-canvas');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      const particleCount = window.innerWidth < 768 ? 30 : 80;
+
+      // Set canvas size
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      // Initialize particles
+      function initParticles() {
+        particles = [];
+        for (let i = 0; i < particleCount; i++) {
+          particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 3 + 1,
+            speedX: Math.random() * 1 - 0.5,
+            speedY: Math.random() * 1 - 0.5,
+            color: `rgba(8, 145, 178, ${Math.random() * 0.4 + 0.1})`,
+          });
+        }
+      }
+
+      // Animation loop
+      function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Update and draw particles
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          
+          // Update position
+          p.x += p.speedX;
+          p.y += p.speedY;
+          
+          // Bounce off edges
+          if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+          
+          // Draw particle
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+          
+          // Draw connections
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const distance = Math.sqrt(
+              Math.pow(p.x - p2.x, 2) + Math.pow(p.y - p2.y, 2)
+            );
+            
+            if (distance < 100) {
+              ctx.beginPath();
+              ctx.strokeStyle = `rgba(8, 145, 178, ${1 - distance / 100})`;
+              ctx.lineWidth = 0.5;
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.stroke();
+            }
+          }
+        }
+        
+        requestAnimationFrame(animateParticles);
+      }
+
+      // Handle resize
+      function handleResize() {
+        resizeCanvas();
+        initParticles();
+      }
+
+      // Initialize
+      resizeCanvas();
+      initParticles();
+      animateParticles();
+
+      // Event listeners
+      window.addEventListener('resize', handleResize);
+
+      // Form Toggle Functionality
+      const loginToggle = document.getElementById('login-toggle');
+      const signupToggle = document.getElementById('signup-toggle');
+      const toggleSlider = document.getElementById('toggle-slider');
+      const loginForm = document.getElementById('login-form');
+      const signupForm = document.getElementById('signup-form');
+      const footerText = document.getElementById('footer-text');
+      const switchLink = document.getElementById('switch-link');
+
+      function showLoginForm() {
+        loginToggle.classList.add('active');
+        signupToggle.classList.remove('active');
+        toggleSlider.style.transform = 'translateX(0)';
+        loginForm.classList.add('active');
+        signupForm.classList.remove('active');
+        footerText.innerHTML = 'Don\'t have an account? <a href="#" id="switch-link">Sign up</a>';
+        updateMascotExpression();
+      }
+
+      function showSignupForm() {
+        loginToggle.classList.remove('active');
+        signupToggle.classList.add('active');
+        toggleSlider.style.transform = 'translateX(100%)';
+        loginForm.classList.remove('active');
+        signupForm.classList.add('active');
+        footerText.innerHTML = 'Already have an account? <a href="#" id="switch-link">Login</a>';
+        updateMascotExpression();
+      }
+
+      loginToggle.addEventListener('click', showLoginForm);
+      signupToggle.addEventListener('click', showSignupForm);
+
+      // Switch between forms via footer link
+      document.addEventListener('click', function(e) {
+        if (e.target && e.target.id === 'switch-link') {
+          e.preventDefault();
+          if (loginForm.classList.contains('active')) {
+            showSignupForm();
+          } else {
+            showLoginForm();
+          }
+        }
+      });
+
+      // Password Toggle Functionality
+      const loginPasswordToggle = document.getElementById('login-password-toggle');
+      const loginPasswordInput = document.getElementById('login-password');
+      const signupPasswordToggle = document.getElementById('signup-password-toggle');
+      const signupPasswordInput = document.getElementById('signup-password');
+      const signupConfirmToggle = document.getElementById('signup-confirm-toggle');
+      const signupConfirmInput = document.getElementById('signup-confirm-password');
+
+      function togglePasswordVisibility(input, toggle) {
+        if (input.type === 'password') {
+          input.type = 'text';
+          toggle.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          `;
+        } else {
+          input.type = 'password';
+          toggle.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+            </svg>
+          `;
+        }
+      }
+
+      loginPasswordToggle.addEventListener('click', () => togglePasswordVisibility(loginPasswordInput, loginPasswordToggle));
+      signupPasswordToggle.addEventListener('click', () => togglePasswordVisibility(signupPasswordInput, signupPasswordToggle));
+      signupConfirmToggle.addEventListener('click', () => togglePasswordVisibility(signupConfirmInput, signupConfirmToggle));
+
+      // Input Underline Animation
+      const inputs = document.querySelectorAll('.form-input');
+      const underlines = document.querySelectorAll('.input-underline');
+
+      inputs.forEach((input, index) => {
+        input.addEventListener('focus', () => {
+          underlines[index].style.width = '100%';
+          updateMascotExpression();
+        });
+
+        input.addEventListener('blur', () => {
+          if (!input.value) {
+            underlines[index].style.width = '0';
+          }
+          updateMascotExpression();
+        });
+
+        input.addEventListener('input', () => {
+          if (input.value) {
+            underlines[index].style.width = '100%';
+          } else {
+            underlines[index].style.width = '0';
+          }
+          updateMascotExpression();
+        });
+      });
+
+      // Mascot Animation
+      const mascotSvg = document.getElementById('mascot-svg');
+      const leftPupil = document.getElementById('left-pupil');
+      const rightPupil = document.getElementById('right-pupil');
+      const mouth = document.getElementById('mouth');
+
+      function updateMascotExpression() {
+        const hasInput = Array.from(inputs).some(input => input.value);
+        
+        if (hasInput) {
+          // Happy expression
+          leftPupil.setAttribute('cy', '42');
+          rightPupil.setAttribute('cy', '42');
+          mouth.setAttribute('d', 'M35,60 Q50,75 65,60');
+        } else {
+          // Neutral expression
+          leftPupil.setAttribute('cy', '40');
+          rightPupil.setAttribute('cy', '40');
+          mouth.setAttribute('d', 'M35,65 Q50,65 65,65');
+        }
+      }
+
+      // Form Submission
+      const forms = document.querySelectorAll('.auth-form');
+      
+      forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Excited expression
+          leftPupil.setAttribute('cy', '38');
+          rightPupil.setAttribute('cy', '38');
+          mouth.setAttribute('d', 'M35,55 Q50,70 65,55');
+          
+          // Reset after animation
+          setTimeout(() => {
+            updateMascotExpression();
+          }, 1000);
+          
+          // Here you would typically handle form submission
+          console.log('Form submitted:', form.id);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

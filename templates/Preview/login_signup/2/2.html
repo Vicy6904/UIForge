@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Login</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #00c6ff;
+            --secondary: #0072ff;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #e2e8f0;
+            --error: #ff3e5f;
+            --success: #2ecc71;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating background elements */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        body::before {
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            top: -50px;
+            left: -50px;
+            animation: float 15s infinite alternate ease-in-out;
+        }
+
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: var(--secondary);
+            bottom: -100px;
+            right: -100px;
+            animation: float 18s 2s infinite alternate ease-in-out;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(30px, 40px);
+            }
+            100% {
+                transform: translate(-20px, -30px);
+            }
+        }
+
+        /* Container */
+        .auth-container {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .auth-container:hover {
+            box-shadow: 0 12px 40px rgba(0, 198, 255, 0.2);
+            border-color: rgba(0, 198, 255, 0.2);
+        }
+
+        /* Tabs */
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 0.75rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-tab.active {
+            color: white;
+        }
+
+        .auth-tab-indicator {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+            transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        /* Form */
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-label {
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            pointer-events: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1.5rem 1rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 198, 255, 0.2);
+        }
+
+        .form-input:focus + .form-label,
+        .form-input:not(:placeholder-shown) + .form-label {
+            top: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--primary);
+        }
+
+        /* Password field container - initially hidden */
+        .password-container {
+            position: relative;
+            overflow: hidden;
+            height: 0;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .password-container.revealed {
+            height: 72px;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        /* Character progress indicator */
+        .char-progress {
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .char-progress-bar {
+            flex: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .char-progress-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        .char-progress-text {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            min-width: 60px;
+            text-align: right;
+        }
+
+        /* Submit button */
+        .submit-btn {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 198, 255, 0.3);
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Error state */
+        .error .form-input {
+            border-color: var(--error);
+            animation: shake 0.4s ease;
+        }
+
+        .error .form-label {
+            color: var(--error);
+        }
+
+        .error-message {
+            color: var(--error);
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .error .error-message {
+            display: block;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+
+        /* Success state */
+        .success .form-input {
+            border-color: var(--success);
+        }
+
+        .success .form-label {
+            color: var(--success);
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-tabs">
+            <div class="auth-tab active" data-tab="login">Login</div>
+            <div class="auth-tab" data-tab="signup">Sign Up</div>
+            <div class="auth-tab-indicator"></div>
+        </div>
+
+        <form class="auth-form" id="loginForm">
+            <div class="form-group">
+                <input type="text" class="form-input" id="loginUsername" placeholder=" " required>
+                <label for="loginUsername" class="form-label">Username</label>
+                <div class="char-progress">
+                    <div class="char-progress-bar">
+                        <div class="char-progress-fill"></div>
+                    </div>
+                    <div class="char-progress-text">0/5</div>
+                </div>
+                <div class="error-message">Username must be at least 5 characters</div>
+            </div>
+
+            <div class="password-container" id="loginPasswordContainer">
+                <div class="form-group">
+                    <input type="password" class="form-input" id="loginPassword" placeholder=" " required disabled>
+                    <label for="loginPassword" class="form-label">Password</label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="loginSubmit" disabled>Login</button>
+        </form>
+
+        <form class="auth-form" id="signupForm" style="display: none;">
+            <div class="form-group">
+                <input type="text" class="form-input" id="signupUsername" placeholder=" " required>
+                <label for="signupUsername" class="form-label">Username</label>
+                <div class="char-progress">
+                    <div class="char-progress-bar">
+                        <div class="char-progress-fill"></div>
+                    </div>
+                    <div class="char-progress-text">0/5</div>
+                </div>
+                <div class="error-message">Username must be at least 5 characters</div>
+            </div>
+
+            <div class="password-container" id="signupPasswordContainer">
+                <div class="form-group">
+                    <input type="password" class="form-input" id="signupPassword" placeholder=" " required disabled>
+                    <label for="signupPassword" class="form-label">Password</label>
+                </div>
+            </div>
+
+            <div class="password-container" id="signupConfirmContainer">
+                <div class="form-group">
+                    <input type="password" class="form-input" id="signupConfirm" placeholder=" " required disabled>
+                    <label for="signupConfirm" class="form-label">Confirm Password</label>
+                    <div class="error-message" id="signupConfirmError">Passwords don't match</div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="signupSubmit" disabled>Create Account</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const loginTab = document.querySelector('[data-tab="login"]');
+            const signupTab = document.querySelector('[data-tab="signup"]');
+            const tabIndicator = document.querySelector('.auth-tab-indicator');
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            
+            // Tab switching
+            function switchTab(tab) {
+                const isLogin = tab === 'login';
+                loginTab.classList.toggle('active', isLogin);
+                signupTab.classList.toggle('active', !isLogin);
+                loginForm.style.display = isLogin ? 'flex' : 'none';
+                signupForm.style.display = isLogin ? 'none' : 'flex';
+                
+                // Move indicator
+                const target = isLogin ? loginTab : signupTab;
+                tabIndicator.style.width = `${target.offsetWidth}px`;
+                tabIndicator.style.left = `${target.offsetLeft}px`;
+            }
+            
+            loginTab.addEventListener('click', () => switchTab('login'));
+            signupTab.addEventListener('click', () => switchTab('signup'));
+            
+            // Initialize tab indicator position
+            setTimeout(() => {
+                tabIndicator.style.width = `${loginTab.offsetWidth}px`;
+                tabIndicator.style.left = `${loginTab.offsetLeft}px`;
+            }, 100);
+            
+            // Username validation and password reveal for login
+            const loginUsername = document.getElementById('loginUsername');
+            const loginPasswordContainer = document.getElementById('loginPasswordContainer');
+            const loginPassword = document.getElementById('loginPassword');
+            const loginSubmit = document.getElementById('loginSubmit');
+            const loginProgressFill = loginForm.querySelector('.char-progress-fill');
+            const loginProgressText = loginForm.querySelector('.char-progress-text');
+            
+            setupUsernameValidation(loginUsername, loginPasswordContainer, loginPassword, loginSubmit, loginProgressFill, loginProgressText);
+            
+            // Username validation and password reveal for signup
+            const signupUsername = document.getElementById('signupUsername');
+            const signupPasswordContainer = document.getElementById('signupPasswordContainer');
+            const signupConfirmContainer = document.getElementById('signupConfirmContainer');
+            const signupPassword = document.getElementById('signupPassword');
+            const signupConfirm = document.getElementById('signupConfirm');
+            const signupSubmit = document.getElementById('signupSubmit');
+            const signupProgressFill = signupForm.querySelector('.char-progress-fill');
+            const signupProgressText = signupForm.querySelector('.char-progress-text');
+            
+            setupUsernameValidation(signupUsername, signupPasswordContainer, signupPassword, signupSubmit, signupProgressFill, signupProgressText);
+            
+            // Additional password validation for signup
+            signupPassword.addEventListener('input', () => {
+                validateSignupPasswords();
+            });
+            
+            signupConfirm.addEventListener('input', () => {
+                validateSignupPasswords();
+            });
+            
+            function validateSignupPasswords() {
+                const password = signupPassword.value;
+                const confirm = signupConfirm.value;
+                const formGroup = signupConfirm.parentElement;
+                const errorMessage = document.getElementById('signupConfirmError');
+                
+                if (password && confirm && password !== confirm) {
+                    formGroup.classList.add('error');
+                    errorMessage.style.display = 'block';
+                    signupSubmit.disabled = true;
+                } else {
+                    formGroup.classList.remove('error');
+                    errorMessage.style.display = 'none';
+                    // Only enable if username is valid and passwords match
+                    signupSubmit.disabled = !(signupUsername.value.length >= 5 && password && password === confirm);
+                }
+            }
+            
+            // Form submission
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Login successful! (This is a demo)');
+            });
+            
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Account created! (This is a demo)');
+            });
+            
+            // Helper function to setup username validation
+            function setupUsernameValidation(usernameInput, passwordContainer, passwordInput, submitButton, progressFill, progressText) {
+                const MIN_CHARS = 5;
+                const formGroup = usernameInput.parentElement;
+                
+                usernameInput.addEventListener('input', function() {
+                    const charCount = this.value.length;
+                    const isValid = charCount >= MIN_CHARS;
+                    const progressPercent = Math.min(100, (charCount / MIN_CHARS) * 100);
+                    
+                    // Update progress bar and text
+                    progressFill.style.width = `${progressPercent}%`;
+                    progressText.textContent = `${charCount}/${MIN_CHARS}`;
+                    
+                    // Toggle error state
+                    if (charCount > 0 && charCount < MIN_CHARS) {
+                        formGroup.classList.add('error');
+                    } else {
+                        formGroup.classList.remove('error');
+                        if (charCount >= MIN_CHARS) {
+                            formGroup.classList.add('success');
+                        } else {
+                            formGroup.classList.remove('success');
+                        }
+                    }
+                    
+                    // Reveal password field when valid
+                    if (isValid && !passwordContainer.classList.contains('revealed')) {
+                        passwordContainer.classList.add('revealed');
+                        passwordInput.disabled = false;
+                        passwordInput.focus();
+                        
+                        // For signup form, also reveal confirm password
+                        if (passwordContainer.id === 'signupPasswordContainer') {
+                            signupConfirmContainer.classList.add('revealed');
+                            signupConfirm.disabled = false;
+                        }
+                    } else if (!isValid && passwordContainer.classList.contains('revealed')) {
+                        passwordContainer.classList.remove('revealed');
+                        passwordInput.disabled = true;
+                        passwordInput.value = '';
+                        
+                        // For signup form, also hide confirm password
+                        if (passwordContainer.id === 'signupPasswordContainer') {
+                            signupConfirmContainer.classList.remove('revealed');
+                            signupConfirm.disabled = true;
+                            signupConfirm.value = '';
+                        }
+                    }
+                    
+                    // Enable/disable submit button
+                    if (passwordContainer.id === 'loginPasswordContainer') {
+                        submitButton.disabled = !(isValid && passwordInput.value);
+                    }
+                });
+                
+                // For login form, also check password input
+                if (passwordContainer.id === 'loginPasswordContainer') {
+                    passwordInput.addEventListener('input', function() {
+                        submitButton.disabled = !(usernameInput.value.length >= MIN_CHARS && this.value);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

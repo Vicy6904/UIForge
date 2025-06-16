@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature's Code: Forest of Forgotten Algorithms</title>
+    <style>
+        /* Base Styles & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --forest-dark: #0d1b1e;
+            --forest-deep: #1d3a3d;
+            --forest-mid: #3a5a40;
+            --forest-light: #588157;
+            --forest-lighter: #a3b18a;
+            --moss: #8cb369;
+            --moss-light: #c4d6b0;
+            --gold-light: #f4e285;
+            --gold-dark: #f6bd60;
+            --moonlight: #e9f5db;
+            --mist: rgba(233, 245, 219, 0.3);
+        }
+        
+        body {
+            background-color: var(--forest-dark);
+            color: var(--moonlight);
+            font-family: 'Merriweather', serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        @font-face {
+            font-family: 'Merriweather';
+            src: url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+        }
+        
+        @font-face {
+            font-family: 'Dancing Script';
+            src: url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+        }
+        
+        h1, h2, h3 {
+            font-weight: 300;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--moss-light);
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--forest-deep);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--moss);
+            border-radius: 4px;
+        }
+        
+        /* Fireflies Background */
+        .fireflies {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .firefly {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: var(--gold-light);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: float ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 0.8; }
+        }
+        
+        /* Mist Layers */
+        .mist-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><filter id="f"><feTurbulence baseFrequency="0.04" numOctaves="5" seed="1"/><feDisplacementMap in="SourceGraphic" scale="5"/></filter><rect width="100" height="100" fill="none" filter="url(%23f)"/></svg>');
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 1;
+            animation: mist 60s linear infinite;
+        }
+        
+        .mist-layer:nth-child(2) {
+            animation-duration: 80s;
+            opacity: 0.15;
+        }
+        
+        @keyframes mist {
+            0% { background-position: 0 0; }
+            100% { background-position: 1000px 500px; }
+        }
+        
+        /* Leaf Trail Cursor */
+        .leaf-trail {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--moss);
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(1px);
+            z-index: 9999;
+            opacity: 0;
+            transition: transform 0.1s ease;
+        }
+        
+        /* Main Container */
+        .forest-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Hero Section - The Grove of Awakening */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(to bottom, rgba(13, 27, 30, 0.8), rgba(29, 58, 61, 0.7)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%233a5a40" d="M30,100 Q50,60 70,100 Z"/></svg>') bottom/200% 20% repeat-x;
+        }
+        
+        .hero-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: var(--gold-light);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(244, 226, 133, 0.5);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin-bottom: 3rem;
+            color: var(--moss-light);
+        }
+        
+        .enter-button {
+            background: transparent;
+            color: var(--gold-light);
+            border: 2px solid var(--gold-light);
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: pulse 2s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 5px var(--gold-light); }
+            100% { box-shadow: 0 0 20px var(--gold-light); }
+        }
+        
+        .enter-button:hover {
+            background: rgba(244, 226, 133, 0.1);
+        }
+        
+        /* About Section - The Druid's Circle */
+        .about-section {
+            padding: 6rem 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%231d3a3d" opacity="0.3"/></svg>') center/contain no-repeat;
+        }
+        
+        .section-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: var(--gold-light);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .druid-circle {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .druid-avatar {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .avatar-container {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--forest-deep);
+            border: 10px solid var(--moss);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(140, 179, 105, 0.3);
+        }
+        
+        .avatar-container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%238cb369" d="M20,50 Q35,20 50,50 T80,50" opacity="0.3"/></svg>');
+            border-radius: 50%;
+            animation: rotate 60s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .avatar-img {
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            background: #ccc;
+            z-index: 2;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .druid-story {
+            flex: 2;
+        }
+        
+        .story-text {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .story-text::first-letter {
+            font-size: 2rem;
+            color: var(--gold-light);
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .skill-leaves {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .skill-leaf {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%238cb369" d="M50,0 Q70,30 50,60 Q30,30 50,0 Z"/></svg>') center/contain no-repeat;
+            opacity: 0.7;
+            animation: float-leaf 10s linear infinite;
+        }
+        
+        @keyframes float-leaf {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        .timeline-branch {
+            margin-top: 3rem;
+            position: relative;
+            height: 60px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 20"><path fill="none" stroke="%238cb369" stroke-width="3" d="M0,10 Q125,20 250,10 T500,10"/></svg>') center/contain no-repeat;
+        }
+        
+        .branch-node {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--moss);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .branch-node:hover {
+            transform: translateY(-50%) scale(1.5);
+            box-shadow: 0 0 10px var(--moss);
+        }
+        
+        .node-tooltip {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--forest-deep);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            border: 1px solid var(--moss);
+            opacity: 0;
+            transition: all 0.3s ease;
+            width: 150px;
+            text-align: center;
+            pointer-events: none;
+        }
+        
+        .branch-node:hover .node-tooltip {
+            opacity: 1;
+            top: -80px;
+        }
+        
+        /* Skills Section - The Algorithm Orchard */
+        .skills-section {
+            padding: 6rem 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%233a5a40" opacity="0.1" d="M20,80 Q50,20 80,80 Z"/></svg>') bottom/100% 20% no-repeat;
+        }
+        
+        .orchard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .skill-plant {
+            background: rgba(29, 58, 61, 0.5);
+            border: 1px solid var(--moss);
+            border-radius: 10px;
+            padding: 2rem 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-plant:hover {
+            box-shadow: 0 0 20px rgba(140, 179, 105, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .skill-plant::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, var(--moss) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .skill-plant:hover::before {
+            opacity: 0.1;
+        }
+        
+        .plant-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--gold-light);
+        }
+        
+        .plant-name {
+            font-size: 1.2rem;
+            color: var(--moss-light);
+        }
+        
+        .plant-category {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--forest-dark);
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--gold-dark);
+        }
+        
+        /* Projects Section - The Stone Garden of Logic */
+        .projects-section {
+            padding: 6rem 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="20" r="15" fill="%231d3a3d" opacity="0.3"/><circle cx="50" cy="50" r="15" fill="%231d3a3d" opacity="0.3"/><circle cx="80" cy="30" r="15" fill="%231d3a3d" opacity="0.3"/></svg>');
+        }
+        
+        .stone-garden {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .stone-card {
+            background: linear-gradient(to bottom, rgba(29, 58, 61, 0.7), rgba(13, 27, 30, 0.8));
+            border: 1px solid var(--moss);
+            border-radius: 5px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stone-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(140, 179, 105, 0.3);
+        }
+        
+        .stone-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--gold-light), var(--moss));
+        }
+        
+        .stone-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%238cb369" opacity="0.1" d="M0,100 Q25,75 50,100 T100,100 Z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+        
+        .stone-title {
+            font-family: 'Dancing Script', cursive;
+            color: var(--gold-light);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stone-desc {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stone-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tech-symbol {
+            background: rgba(140, 179, 105, 0.2);
+            color: var(--moonlight);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--moss);
+        }
+        
+        .stone-links {
+            display: flex;
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stone-link {
+            color: var(--moonlight);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .stone-link:hover {
+            color: var(--gold-light);
+        }
+        
+        /* Experience Section - The Growth Rings */
+        .experience-section {
+            padding: 6rem 0;
+            background: linear-gradient(to bottom, var(--forest-dark), var(--forest-deep));
+        }
+        
+        .tree-trunk {
+            position: relative;
+            max-width: 800px;
+            margin: 4rem auto;
+            padding-left: 100px;
+        }
+        
+        .trunk-line {
+            position: absolute;
+            top: 0;
+            left: 50px;
+            width: 10px;
+            height: 100%;
+            background: linear-gradient(to bottom, #3a5a40, #588157, #3a5a40);
+            border-radius: 5px;
+        }
+        
+        .growth-ring {
+            position: relative;
+            margin-bottom: 4rem;
+            padding-left: 50px;
+        }
+        
+        .ring-marker {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--moss);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--forest-dark);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        
+        .ring-marker:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px var(--moss);
+        }
+        
+        .ring-content {
+            background: rgba(29, 58, 61, 0.7);
+            border: 1px solid var(--moss);
+            padding: 1.5rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+        }
+        
+        .ring-content.active {
+            opacity: 1;
+            box-shadow: 0 0 20px rgba(140, 179, 105, 0.2);
+        }
+        
+        .ring-title {
+            color: var(--gold-light);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .ring-company {
+            color: var(--moss-light);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .ring-desc {
+            font-size: 0.9rem;
+        }
+        
+        /* Resume Section - The Scroll of Seasons */
+        .resume-section {
+            padding: 6rem 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%231d3a3d" opacity="0.1" d="M10,10 L90,10 Q100,20 90,30 L10,30 Q0,20 10,10 Z"/></svg>');
+        }
+        
+        .scroll-container {
+            width: 100%;
+            overflow-x: auto;
+            padding: 2rem 0;
+            white-space: nowrap;
+        }
+        
+        .resume-scroll {
+            display: inline-block;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400"><rect x="0" y="0" width="800" height="400" fill="%23e9f5db" opacity="0.1"/><path fill="none" stroke="%238cb369" stroke-width="2" stroke-dasharray="5,5" d="M50,50 L750,50 L750,350 L50,350 Z"/></svg>') center/cover no-repeat;
+            width: 800px;
+            height: 400px;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .resume-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            height: 100%;
+            color: var(--forest-dark);
+        }
+        
+        .resume-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .resume-heading {
+            font-family: 'Dancing Script', cursive;
+            color: var(--forest-mid);
+            font-size: 1.5rem;
+            border-bottom: 1px solid var(--moss);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .resume-item {
+            white-space: normal;
+        }
+        
+        .resume-item-title {
+            font-weight: bold;
+            color: var(--forest-deep);
+        }
+        
+        .download-btn {
+            background: var(--moonlight);
+            color: var(--forest-dark);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 2rem auto 0;
+            border-radius: 30px;
+        }
+        
+        .download-btn:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(244, 226, 133, 0.3);
+        }
+        
+        /* Testimonials Section - The Whispering Stones */
+        .testimonials-section {
+            padding: 6rem 0;
+            background: linear-gradient(to bottom, var(--forest-deep), var(--forest-dark));
+        }
+        
+        .whispering-stones {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 2rem 0;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .stone-testimonial {
+            min-width: 300px;
+            background: rgba(29, 58, 61, 0.7);
+            border: 1px solid var(--moss);
+            border-radius: 10px;
+            padding: 1.5rem;
+            scroll-snap-align: start;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stone-testimonial:hover {
+            box-shadow: 0 0 20px rgba(140, 179, 105, 0.3);
+        }
+        
+        .stone-testimonial::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 50px;
+            height: 50px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%238cb369" opacity="0.1" d="M20,50 Q35,20 50,50 T80,50"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        .testimonial-quote {
+            font-style: italic;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--moss);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--forest-dark);
+            font-weight: bold;
+        }
+        
+        .author-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .author-name {
+            font-weight: bold;
+            color: var(--gold-light);
+        }
+        
+        .author-role {
+            font-size: 0.8rem;
+            color: var(--moss-light);
+        }
+        
+        /* Contact Section - The Spirit Grove */
+        .contact-section {
+            padding: 6rem 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%233a5a40" opacity="0.1" d="M0,100 Q50,0 100,100 Z"/></svg>') top/100% 20% no-repeat, 
+                        linear-gradient(to bottom, var(--forest-dark), var(--forest-deep));
+        }
+        
+        .spirit-grove {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(29, 58, 61, 0.7);
+            border: 1px solid var(--moss);
+            border-radius: 10px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .spirit-grove::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%238cb369" opacity="0.05" d="M20,80 Q50,20 80,80 Z"/></svg>');
+            z-index: 0;
+        }
+        
+        .contact-form {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gold-light);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(13, 27, 30, 0.5);
+            border: 1px solid var(--moss);
+            color: var(--moonlight);
+            font-family: 'Merriweather', serif;
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--gold-light);
+            box-shadow: 0 0 10px rgba(244, 226, 133, 0.5);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, var(--gold-light), var(--moss));
+            color: var(--forest-dark);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 2rem auto 0;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(140, 179, 105, 0.3);
+        }
+        
+        .social-mushrooms {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .social-mushroom {
+            width: 50px;
+            height: 50px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%238cb369" d="M50,30 Q70,50 50,70 Q30,50 50,30 Z"/><path fill="%23f4e285" d="M30,70 Q50,90 70,70 L50,70 Z"/></svg>') center/contain no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--forest-dark);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .social-mushroom:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        /* Footer */
+        .forest-footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--moss-light);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--moss);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .druid-circle {
+                flex-direction: column;
+            }
+            
+            .orchard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .tree-trunk {
+                padding-left: 50px;
+            }
+            
+            .trunk-line {
+                left: 20px;
+            }
+            
+            .growth-ring {
+                padding-left: 30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .orchard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stone-garden {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fireflies Background -->
+    <div class="fireflies" id="fireflies"></div>
+    
+    <!-- Mist Layers -->
+    <div class="mist-layer"></div>
+    <div class="mist-layer"></div>
+    
+    <!-- Leaf Trail Cursor -->
+    <div id="leaf-trail"></div>
+    
+    <div class="forest-container">
+        <!-- Hero Section - The Grove of Awakening -->
+        <section class="hero-section" id="home">
+            <h1 class="hero-title">Eldrin the Code Druid</h1>
+            <p class="hero-subtitle">Rebuilding Forgotten Futures, One Algorithm at a Time</p>
+            <button class="enter-button">Enter the Forest</button>
+        </section>
+        
+        <!-- About Section - The Druid's Circle -->
+        <section class="about-section" id="about">
+            <h2 class="section-title">The Druid's Circle</h2>
+            
+            <div class="druid-circle">
+                <div class="druid-avatar">
+                    <div class="avatar-container">
+                        <div class="avatar-img"></div>
+                    </div>
+                </div>
+                
+                <div class="druid-story">
+                    <div class="story-text">
+                        In the Valley of Variables, a seeker of logic was born. My journey began amidst the tangled vines of HTML and CSS, where I first learned to shape the digital wilderness. As I wandered deeper into the forest of technology, I discovered the ancient runes of JavaScript and the powerful incantations of modern frameworks.
+                        
+                        <div class="skill-leaves">
+                            <div class="skill-leaf" style="left: 20%; top: 10%; animation-delay: 0s;"></div>
+                            <div class="skill-leaf" style="left: 70%; top: 30%; animation-delay: 2s;"></div>
+                            <div class="skill-leaf" style="left: 40%; top: 50%; animation-delay: 4s;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="story-text">
+                        Today, as a guardian of the Forest of Forgotten Algorithms, I work to preserve the wisdom of past coders while cultivating new growth. My path has taken me through many clearings - from front-end groves to back-end thickets - each teaching me new ways to harmonize logic with creativity.
+                    </div>
+                    
+                    <div class="timeline-branch">
+                        <div class="branch-node" style="left: 0%;">
+                            <div class="node-tooltip">2018: First Steps</div>
+                        </div>
+                        <div class="branch-node" style="left: 25%;">
+                            <div class="node-tooltip">2019: JavaScript</div>
+                        </div>
+                        <div class="branch-node" style="left: 50%;">
+                            <div class="node-tooltip">2020: Frameworks</div>
+                        </div>
+                        <div class="branch-node" style="left: 75%;">
+                            <div class="node-tooltip">2021: Full-Stack</div>
+                        </div>
+                        <div class="branch-node" style="left: 100%;">
+                            <div class="node-tooltip">Present: Mastery</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Skills Section - The Algorithm Orchard -->
+        <section class="skills-section" id="skills">
+            <h2 class="section-title">The Algorithm Orchard</h2>
+            
+            <div class="orchard-grid">
+                <div class="skill-plant">
+                    <div class="plant-icon">🌿</div>
+                    <h3 class="plant-name">HTML</h3>
+                    <span class="plant-category">Frontend Roots</span>
+                </div>
+                
+                <div class="skill-plant">
+                    <div class="plant-icon">🌱</div>
+                    <h3 class="plant-name">CSS</h3>
+                    <span class="plant-category">Frontend Roots</span>
+                </div>
+                
+                <div class="skill-plant">
+                    <div class="plant-icon">🍃</div>
+                    <h3 class="plant-name">JavaScript</h3>
+                    <span class="plant-category">Frontend Roots</span>
+                </div>
+                
+                <div class="skill-plant">
+                    <div class="plant-icon">🌲</div>
+                    <h3 class="plant-name">React</h3>
+                    <span class="plant-category">Frontend Roots</span>
+                </div>
+                
+                <div class="skill-plant">
+                    <div class="plant-icon">🌳</div>
+                    <h3 class="plant-name">Node.js</h3>
+                    <span class="plant-category">Backend Soil</span>
+                </div>
+                
+                <div class="skill-plant">
+                    <div class="plant-icon">🍄</div>
+                    <h3 class="plant-name">Python</h3>
+                    <span class="plant-category">Backend Soil</span>
+                </div>
+                
+                <div class="skill-plant">
+                    <div class="plant-icon">🌾</div>
+                    <h3 class="plant-name">Git</h3>
+                    <span class="plant-category">Dev Tool Vines</span>
+                </div>
+                
+                <div class="skill-plant">
+                    <div class="plant-icon">🌻</div>
+                    <h3 class="plant-name">Problem Solving</h3>
+                    <span class="plant-category">Forest Traits</span>
+                </div>
+                
+                <div class="skill-plant">
+                    <div class="plant-icon">🌺</div>
+                    <h3 class="plant-name">Teamwork</h3>
+                    <span class="plant-category">Forest Traits</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Projects Section - The Stone Garden of Logic -->
+        <section class="projects-section" id="projects">
+            <h2 class="section-title">The Stone Garden of Logic</h2>
+            
+            <div class="stone-garden">
+                <div class="stone-card">
+                    <h3 class="stone-title">Forest Path Finder</h3>
+                    <p class="stone-desc">An interactive map that helps hikers navigate through national parks using optimized pathfinding algorithms.</p>
+                    
+                    <div class="stone-tech">
+                        <span class="tech-symbol">React</span>
+                        <span class="tech-symbol">D3.js</span>
+                        <span class="tech-symbol">Node.js</span>
+                    </div>
+                    
+                    <div class="stone-links">
+                        <a href="#" class="stone-link">View Live</a>
+                        <a href="#" class="stone-link">Source Code</a>
+                    </div>
+                </div>
+                
+                <div class="stone-card">
+                    <h3 class="stone-title">Druid's Spellbook</h3>
+                    <p class="stone-desc">A note-taking application with markdown support and natural language search capabilities.</p>
+                    
+                    <div class="stone-tech">
+                        <span class="tech-symbol">Vue.js</span>
+                        <span class="tech-symbol">Firebase</span>
+                        <span class="tech-symbol">NLP</span>
+                    </div>
+                    
+                    <div class="stone-links">
+                        <a href="#" class="stone-link">View Live</a>
+                        <a href="#" class="stone-link">Source Code</a>
+                    </div>
+                </div>
+                
+                <div class="stone-card">
+                    <h3 class="stone-title">Ancient Rune Translator</h3>
+                    <p class="stone-desc">A machine learning tool that deciphers ancient symbols and provides historical context.</p>
+                    
+                    <div class="stone-tech">
+                        <span class="tech-symbol">Python</span>
+                        <span class="tech-symbol">TensorFlow</span>
+                        <span class="tech-symbol">Flask</span>
+                    </div>
+                    
+                    <div class="stone-links">
+                        <a href="#" class="stone-link">View Live</a>
+                        <a href="#" class="stone-link">Source Code</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Experience Section - The Growth Rings -->
+        <section class="experience-section" id="experience">
+            <h2 class="section-title">The Growth Rings</h2>
+            
+            <div class="tree-trunk">
+                <div class="trunk-line"></div>
+                
+                <div class="growth-ring">
+                    <div class="ring-marker">1</div>
+                    <div class="ring-content active">
+                        <h3 class="ring-title">Junior Web Druid</h3>
+                        <p class="ring-company">Forest Web Guild · 2018-2019</p>
+                        <p class="ring-desc">Crafted simple spells (websites) for local villagers and learned the ancient ways of responsive design.</p>
+                    </div>
+                </div>
+                
+                <div class="growth-ring">
+                    <div class="ring-marker">2</div>
+                    <div class="ring-content">
+                        <h3 class="ring-title">Frontend Shaman</h3>
+                        <p class="ring-company">Digital Grove Collective · 2019-2020</p>
+                        <p class="ring-desc">Conjured interactive user experiences and mastered the art of state management potions.</p>
+                    </div>
+                </div>
+                
+                <div class="growth-ring">
+                    <div class="ring-marker">3</div>
+                    <div class="ring-content">
+                        <h3 class="ring-title">Fullstack Druid</h3>
+                        <p class="ring-company">Ancient Oak Tech · 2020-2022</p>
+                        <p class="ring-desc">Bridged the gap between frontend groves and backend thickets, creating harmonious full-stack ecosystems.</p>
+                    </div>
+                </div>
+                
+                <div class="growth-ring">
+                    <div class="ring-marker">4</div>
+                    <div class="ring-content">
+                        <h3 class="ring-title">Archdruid of Code</h3>
+                        <p class="ring-company">Circle of Silicon · 2022-Present</p>
+                        <p class="ring-desc">Lead a coven of developers in crafting complex digital rituals and mentoring new initiates.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Resume Section - The Scroll of Seasons -->
+        <section class="resume-section" id="resume">
+            <h2 class="section-title">The Scroll of Seasons</h2>
+            
+            <div class="scroll-container">
+                <div class="resume-scroll">
+                    <div class="resume-content">
+                        <div class="resume-column">
+                            <h3 class="resume-heading">Education</h3>
+                            <div class="resume-item">
+                                <p class="resume-item-title">Master of Digital Alchemy</p>
+                                <p>Ancient University of Technology · 2016-2018</p>
+                            </div>
+                            <div class="resume-item">
+                                <p class="resume-item-title">Bachelor of Forest Computing</p>
+                                <p>Druid Academy · 2012-2016</p>
+                            </div>
+                            
+                            <h3 class="resume-heading">Skills</h3>
+                            <div class="resume-item">
+                                <p>Frontend: HTML, CSS, JavaScript, React</p>
+                                <p>Backend: Node.js, Python, SQL</p>
+                                <p>Tools: Git, VS Code, Docker</p>
+                            </div>
+                        </div>
+                        
+                        <div class="resume-column">
+                            <h3 class="resume-heading">Experience</h3>
+                            <div class="resume-item">
+                                <p class="resume-item-title">Archdruid of Code</p>
+                                <p>Circle of Silicon · 2022-Present</p>
+                            </div>
+                            <div class="resume-item">
+                                <p class="resume-item-title">Fullstack Druid</p>
+                                <p>Ancient Oak Tech · 2020-2022</p>
+                            </div>
+                            <div class="resume-item">
+                                <p class="resume-item-title">Frontend Shaman</p>
+                                <p>Digital Grove Collective · 2019-2020</p>
+                            </div>
+                            
+                            <h3 class="resume-heading">Certifications</h3>
+                            <div class="resume-item">
+                                <p>React Shaman Certification</p>
+                                <p>Node.js Druidry</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="download-btn">📥 Download The Scroll</button>
+        </section>
+        
+        <!-- Testimonials Section - The Whispering Stones -->
+        <section class="testimonials-section" id="testimonials">
+            <h2 class="section-title">The Whispering Stones</h2>
+            
+            <div class="whispering-stones">
+                <div class="stone-testimonial">
+                    <p class="testimonial-quote">"Eldrin transformed our digital grove with his magical touch. His code is like ancient poetry - elegant and powerful."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">G</div>
+                        <div class="author-info">
+                            <p class="author-name">Gwendolyn Oakheart</p>
+                            <p class="author-role">High Priestess, Forest Web Guild</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stone-testimonial">
+                    <p class="testimonial-quote">"Working with Eldrin is like having a wise druid guide you through the densest technical thickets. His knowledge is deep and his patience endless."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">B</div>
+                        <div class="author-info">
+                            <p class="author-name">Bramble Thornback</p>
+                            <p class="author-role">CTO, Digital Grove Collective</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stone-testimonial">
+                    <p class="testimonial-quote">"Eldrin's ability to explain complex concepts using forest analogies makes him the most effective mentor I've ever worked with."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">F</div>
+                        <div class="author-info">
+                            <p class="author-name">Fernsong Willowbranch</p>
+                            <p class="author-role">Junior Druid, Ancient Oak Tech</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section - The Spirit Grove -->
+        <section class="contact-section" id="contact">
+            <h2 class="section-title">The Spirit Grove</h2>
+            
+            <div class="spirit-grove">
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Your Name</label>
+                        <input type="text" id="name" class="form-input" placeholder="What do the forest creatures call you?">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="form-label">Rune Address</label>
+                        <input type="email" id="email" class="form-input" placeholder="Where may I send my owl?">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" class="form-label">Whispered Message</label>
+                        <textarea id="message" class="form-input" rows="5" placeholder="Speak your mind, traveler..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+                
+                <div class="social-mushrooms">
+                    <a href="#" class="social-mushroom">L</a>
+                    <a href="#" class="social-mushroom">G</a>
+                    <a href="#" class="social-mushroom">T</a>
+                    <a href="#" class="social-mushroom">C</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="forest-footer">
+            <p>© 2023 Nature's Code: Forest of Forgotten Algorithms. All spells preserved.</p>
+            <p>Created with 🌿 by Eldrin the Code Druid</p>
+        </footer>
+    </div>
+
+    <script>
+        // Create fireflies
+        function createFireflies() {
+            const container = document.getElementById('fireflies');
+            const fireflyCount = 20;
+            
+            for (let i = 0; i < fireflyCount; i++) {
+                const firefly = document.createElement('div');
+                firefly.classList.add('firefly');
+                
+                // Random position
+                firefly.style.left = `${Math.random() * 100}%`;
+                firefly.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation duration and delay
+                const duration = Math.random() * 10 + 5;
+                const delay = Math.random() * 10;
+                firefly.style.animationDuration = `${duration}s`;
+                firefly.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(firefly);
+            }
+        }
+        
+        // Create leaf trail cursor
+        function createLeafTrail() {
+            const trail = document.getElementById('leaf-trail');
+            const leaves = [];
+            const leafCount = 5;
+            
+            for (let i = 0; i < leafCount; i++) {
+                const leaf = document.createElement('div');
+                leaf.classList.add('leaf-trail');
+                leaf.style.opacity = (i + 1) / leafCount;
+                trail.appendChild(leaf);
+                leaves.push(leaf);
+            }
+            
+            document.addEventListener('mousemove', (e) => {
+                let x = e.clientX;
+                let y = e.clientY;
+                
+                leaves.forEach((leaf, index) => {
+                    setTimeout(() => {
+                        leaf.style.left = `${x}px`;
+                        leaf.style.top = `${y}px`;
+                        leaf.style.opacity = 0.8 - (index * 0.15);
+                    }, index * 50);
+                });
+            });
+        }
+        
+        // Animate growth rings on scroll
+        function animateGrowthRings() {
+            const rings = document.querySelectorAll('.growth-ring');
+            
+            rings.forEach((ring, index) => {
+                setTimeout(() => {
+                    const content = ring.querySelector('.ring-content');
+                    const marker = ring.querySelector('.ring-marker');
+                    
+                    marker.addEventListener('click', () => {
+                        // Remove active class from all rings
+                        document.querySelectorAll('.ring-content').forEach(el => {
+                            el.classList.remove('active');
+                        });
+                        
+                        // Add active class to clicked ring
+                        content.classList.add('active');
+                    });
+                }, index * 100);
+            });
+        }
+        
+        // Smooth scrolling for navigation
+        function setupSmoothScroll() {
+            document.querySelector('.enter-button').addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelector('#about').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+            
+            // In a full implementation, you would add similar event listeners
+            // for all navigation links to their respective sections
+        }
+        
+        // Initialize everything when the page loads
+        window.addEventListener('load', () => {
+            createFireflies();
+            createLeafTrail();
+            animateGrowthRings();
+            setupSmoothScroll();
+            
+            // Simulate forest sounds (would use actual audio in production)
+            console.log("Gentle forest sounds play in the background...");
+        });
+        
+        // Animate elements when they come into view
+        window.addEventListener('scroll', () => {
+            const aboutTexts = document.querySelectorAll('.about-text');
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            
+            aboutTexts.forEach((text, index) => {
+                const textPosition = text.getBoundingClientRect().top;
+                
+                if (textPosition < windowHeight * 0.75) {
+                    setTimeout(() => {
+                        text.classList.add('visible');
+                    }, index * 300);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

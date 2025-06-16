@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HELLFIRE AUTH | Login That Burns</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff4d00;
+            --primary-dark: #e63900;
+            --primary-light: #ff6a33;
+            --secondary: #00e0ff;
+            --dark: #0f0f10;
+            --darker: #080809;
+            --light: #f0f0f0;
+            --gray: #2a2a2e;
+            --neon-glow: 0 0 10px rgba(255, 77, 0, 0.8), 
+                         0 0 20px rgba(255, 77, 0, 0.6), 
+                         0 0 30px rgba(255, 77, 0, 0.4);
+            --blue-glow: 0 0 10px rgba(0, 224, 255, 0.8), 
+                         0 0 20px rgba(0, 224, 255, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--darker);
+            color: var(--light);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .auth-container {
+            position: relative;
+            width: 420px;
+            padding: 40px;
+            background-color: rgba(15, 15, 16, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(255, 77, 0, 0.2);
+            z-index: 1;
+            border: 1px solid var(--gray);
+            backdrop-filter: blur(5px);
+            overflow: hidden;
+        }
+
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,77,0,0.1) 0%, rgba(255,77,0,0) 70%);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .mode-toggle {
+            position: relative;
+            display: flex;
+            margin-bottom: 30px;
+            background-color: var(--gray);
+            border-radius: 50px;
+            padding: 5px;
+            z-index: 1;
+        }
+
+        .toggle-bg {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 50%;
+            height: calc(100% - 10px);
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            color: var(--light);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .toggle-btn.active {
+            color: white;
+        }
+
+        .flame-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            box-shadow: var(--neon-glow);
+            animation: flame-flicker 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes flame-flicker {
+            0%, 100% { opacity: 0.8; height: 4px; }
+            50% { opacity: 1; height: 6px; }
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .auth-form.hidden {
+            display: none;
+        }
+
+        .title {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .neon-text {
+            color: var(--primary);
+            text-shadow: var(--neon-glow);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px 15px 45px;
+            background-color: rgba(42, 42, 46, 0.5);
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+            color: var(--light);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(255, 77, 0, 0.2);
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 45px;
+            top: 15px;
+            color: var(--light);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .input-group input:focus + label,
+        .input-group input:valid + label {
+            transform: translateY(-25px) translateX(-25px) scale(0.8);
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .input-highlight {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.4s ease;
+        }
+
+        .input-group input:focus ~ .input-highlight {
+            width: 100%;
+        }
+
+        .icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus ~ .icon {
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: var(--light);
+            opacity: 0.7;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .show-password:hover {
+            opacity: 1;
+            color: var(--secondary);
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .remember input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            background-color: var(--gray);
+            border: 1px solid var(--primary);
+            border-radius: 3px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .remember:hover .checkmark {
+            background-color: rgba(42, 42, 46, 0.8);
+        }
+
+        .remember input:checked ~ .checkmark {
+            background-color: var(--primary);
+        }
+
+        .checkmark::after {
+            content: '';
+            position: absolute;
+            display: none;
+            left: 5px;
+            top: 2px;
+            width: 4px;
+            height: 8px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .remember input:checked ~ .checkmark::after {
+            display: block;
+        }
+
+        .forgot {
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .forgot:hover {
+            color: var(--secondary);
+            text-shadow: var(--blue-glow);
+        }
+
+        .auth-btn {
+            position: relative;
+            padding: 15px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 77, 0, 0.4);
+            z-index: 1;
+        }
+
+        .auth-btn:hover {
+            box-shadow: 0 0 20px rgba(255, 77, 0, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .auth-btn:active {
+            transform: translateY(0);
+        }
+
+        .auth-btn span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-flame {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(transparent, var(--primary-light));
+            transition: all 0.3s ease;
+            z-index: 0;
+        }
+
+        .auth-btn:hover .btn-flame {
+            height: 30%;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            color: var(--light);
+            opacity: 0.7;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gray), transparent);
+        }
+
+        .divider span {
+            padding: 0 15px;
+            font-size: 14px;
+        }
+
+        .social-auth {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: none;
+            background-color: var(--gray);
+            color: var(--light);
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 0;
+        }
+
+        .social-btn:hover::before {
+            opacity: 1;
+        }
+
+        .social-btn i {
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-btn.google:hover {
+            color: #db4437;
+        }
+
+        .social-btn.github:hover {
+            color: #333;
+        }
+
+        .social-btn.twitter:hover {
+            color: #1da1f2;
+        }
+
+        .terms {
+            font-size: 12px;
+            text-align: center;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+
+        .terms a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+            text-shadow: var(--blue-glow);
+        }
+
+        .corner-decoration {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-width: 3px;
+            border-style: solid;
+            border-image: linear-gradient(135deg, var(--primary), var(--secondary)) 1;
+            z-index: 0;
+        }
+
+        .corner-decoration.top-left {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-decoration.top-right {
+            top: 20px;
+            right: 20px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-decoration.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-decoration.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .auth-container {
+                width: 90%;
+                padding: 30px 20px;
+            }
+            
+            .title {
+                font-size: 24px;
+            }
+        }
+
+        .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes float-ember {
+            0% {
+                transform: translate(0, 0);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translate(50px, 50px);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(100px, 100px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles-js"></div>
+    
+    <div class="auth-container">
+        <div class="mode-toggle">
+            <div class="toggle-bg"></div>
+            <button class="toggle-btn active" id="login-toggle">LOGIN</button>
+            <button class="toggle-btn" id="signup-toggle">SIGN UP</button>
+        </div>
+        
+        <div class="flame-effect"></div>
+        
+        <div class="auth-form" id="login-form">
+            <h1 class="title">ENTER THE <span class="neon-text">REALM</span></h1>
+            
+            <div class="input-group">
+                <input type="text" id="login-email" required>
+                <label for="login-email">EMAIL</label>
+                <div class="input-highlight"></div>
+                <i class="fas fa-envelope icon"></i>
+            </div>
+            
+            <div class="input-group">
+                <input type="password" id="login-password" required>
+                <label for="login-password">PASSWORD</label>
+                <div class="input-highlight"></div>
+                <i class="fas fa-lock icon"></i>
+                <button class="show-password"><i class="fas fa-eye"></i></button>
+            </div>
+            
+            <div class="options">
+                <label class="remember">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                    STAY LOGGED IN
+                </label>
+                <a href="#" class="forgot">FORGOT PASSWORD?</a>
+            </div>
+            
+            <button class="auth-btn">
+                <span>IGNITE</span>
+                <div class="btn-flame"></div>
+            </button>
+            
+            <div class="divider">
+                <span>OR</span>
+            </div>
+            
+            <div class="social-auth">
+                <button class="social-btn google">
+                    <i class="fab fa-google"></i>
+                </button>
+                <button class="social-btn github">
+                    <i class="fab fa-github"></i>
+                </button>
+                <button class="social-btn twitter">
+                    <i class="fab fa-twitter"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="auth-form hidden" id="signup-form">
+            <h1 class="title">JOIN THE <span class="neon-text">INFERNO</span></h1>
+            
+            <div class="input-group">
+                <input type="text" id="signup-username" required>
+                <label for="signup-username">USERNAME</label>
+                <div class="input-highlight"></div>
+                <i class="fas fa-user icon"></i>
+            </div>
+            
+            <div class="input-group">
+                <input type="email" id="signup-email" required>
+                <label for="signup-email">EMAIL</label>
+                <div class="input-highlight"></div>
+                <i class="fas fa-envelope icon"></i>
+            </div>
+            
+            <div class="input-group">
+                <input type="password" id="signup-password" required>
+                <label for="signup-password">PASSWORD</label>
+                <div class="input-highlight"></div>
+                <i class="fas fa-lock icon"></i>
+            </div>
+            
+            <div class="input-group">
+                <input type="password" id="signup-confirm" required>
+                <label for="signup-confirm">CONFIRM PASSWORD</label>
+                <div class="input-highlight"></div>
+                <i class="fas fa-lock icon"></i>
+            </div>
+            
+            <button class="auth-btn">
+                <span>BECOME FLAME</span>
+                <div class="btn-flame"></div>
+            </button>
+            
+            <div class="terms">
+                By signing up, you agree to our <a href="#">Terms of Damnation</a> and <a href="#">Privacy Policy</a>.
+            </div>
+        </div>
+    </div>
+    
+    <div class="corner-decoration top-left"></div>
+    <div class="corner-decoration top-right"></div>
+    <div class="corner-decoration bottom-left"></div>
+    <div class="corner-decoration bottom-right"></div>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize particles.js
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#ff4d00"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#ff4d00",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 0.5
+                            }
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+
+            // Toggle between login and signup forms
+            const loginToggle = document.getElementById('login-toggle');
+            const signupToggle = document.getElementById('signup-toggle');
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const toggleBg = document.querySelector('.toggle-bg');
+
+            loginToggle.addEventListener('click', function() {
+                if (!this.classList.contains('active')) {
+                    this.classList.add('active');
+                    signupToggle.classList.remove('active');
+                    loginForm.classList.remove('hidden');
+                    signupForm.classList.add('hidden');
+                    toggleBg.style.transform = 'translateX(0)';
+                }
+            });
+
+            signupToggle.addEventListener('click', function() {
+                if (!this.classList.contains('active')) {
+                    this.classList.add('active');
+                    loginToggle.classList.remove('active');
+                    signupForm.classList.remove('hidden');
+                    loginForm.classList.add('hidden');
+                    toggleBg.style.transform = 'translateX(100%)';
+                }
+            });
+
+            // Show password toggle
+            const showPasswordBtns = document.querySelectorAll('.show-password');
+            showPasswordBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const passwordInput = this.parentElement.querySelector('input');
+                    const icon = this.querySelector('i');
+                    
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        passwordInput.type = 'password';
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                });
+            });
+
+            // Input focus effects
+            const inputs = document.querySelectorAll('.input-group input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.querySelector('.icon').style.color = 'var(--primary)';
+                    this.parentElement.querySelector('.icon').style.opacity = '1';
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (!this.value) {
+                        this.parentElement.querySelector('.icon').style.color = 'var(--light)';
+                        this.parentElement.querySelector('.icon').style.opacity = '0.7';
+                    }
+                });
+            });
+
+            // Button hover effects
+            const authButtons = document.querySelectorAll('.auth-btn');
+            authButtons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    const flame = this.querySelector('.btn-flame');
+                    flame.style.height = '30%';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    const flame = this.querySelector('.btn-flame');
+                    flame.style.height = '0';
+                });
+            });
+
+            // Add ripple effect to buttons
+            document.querySelectorAll('.auth-btn, .social-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const ripple = document.createElement('span');
+                    ripple.classList.add('ripple');
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 1000);
+                });
+            });
+
+            // Add some random flame animations to the main flame effect
+            const flameEffect = document.querySelector('.flame-effect');
+            setInterval(() => {
+                const randomHeight = Math.random() * 4 + 4;
+                flameEffect.style.height = `${randomHeight}px`;
+            }, 300);
+
+            // Create some floating embers
+            for (let i = 0; i < 10; i++) {
+                createEmber();
+            }
+            
+            function createEmber() {
+                const ember = document.createElement('div');
+                ember.classList.add('ember');
+                
+                // Random position
+                const startX = Math.random() * window.innerWidth;
+                const startY = Math.random() * window.innerHeight;
+                
+                // Random size
+                const size = Math.random() * 5 + 2;
+                
+                // Random animation duration
+                const duration = Math.random() * 20 + 10;
+                
+                // Random delay
+                const delay = Math.random() * 5;
+                
+                ember.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: radial-gradient(circle, var(--primary-light), var(--primary));
+                    border-radius: 50%;
+                    box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+                    left: ${startX}px;
+                    top: ${startY}px;
+                    opacity: ${Math.random() * 0.5 + 0.3};
+                    animation: float-ember ${duration}s linear ${delay}s infinite;
+                    z-index: 0;
+                `;
+                
+                document.body.appendChild(ember);
+                
+                // Remove ember after animation completes (just in case)
+                setTimeout(() => {
+                    ember.remove();
+                    createEmber(); // Create a new ember to replace this one
+                }, duration * 1000);
+            }
+        });
+    </script>
+</body>
+</html>

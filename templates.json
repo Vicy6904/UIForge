@@ -1,0 +1,223 @@
+[
+    {
+        "id": "login_signup-1",
+        "title": "Futuristic Login & Signup Portal",
+        "description": "Direct neural interface for cognitive data visualization",
+        "category": "login_signup",
+        "thumbnail": "templates/Preview/login_signup/1/1.png",
+        "previewUrl": "templates/Preview/login_signup/1/1.html",
+        "downloadUrl": "templates/Download/login_signup/1.zip",
+        "tags": [
+            "Cognitive",
+            "AI",
+            "Integration"
+        ],
+        "tech": [
+            "Neural CSS",
+            "HTML",
+            "Quantum JS"
+        ]
+    },
+    {
+        "id": "login_signup-2",
+        "title": "Character Unlock Login Interface",
+        "description": "Login & Signup Page with Character-Based Unlocking.",
+        "category": "login_signup",
+        "thumbnail": "templates/Preview/login_signup/2/2.png",
+        "previewUrl": "templates/Preview/login_signup/2/2.html",
+        "downloadUrl": "templates/Download/login_signup/2.zip",
+        "tags": [
+            "Interactive",
+            "Animated Unlock",
+            "Neon Minimal"
+        ],
+        "tech": [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Glassmorphism",
+            "Web Animations API"
+        ]
+    },
+    {
+        "id": "login_signup-3",
+        "title": "Hellfire Authentication Portal",
+        "description": "Login & Signup Page with Hellfire Particle Effects and Flame Animations",
+        "category": "login_signup",
+        "thumbnail": "templates/Preview/login_signup/3/3.png",
+        "previewUrl": "templates/Preview/login_signup/3/3.html",
+        "downloadUrl": "templates/Download/login_signup/3.zip",
+        "tags": [
+            "Particle Effects",
+            "Neon Design",
+            "Dark Theme",
+            "Interactive"
+        ],
+        "tech": [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Particles.js"
+        ]
+    },
+    {
+        "id": "login_signup-4",
+        "title": "Nebula Authentication Gateway",
+        "description": "Interactive Book-Style Login & Signup with 3D Page Flip Animation and Gradient Galaxy Background",
+        "category": "login_signup",
+        "thumbnail": "templates/Preview/login_signup/4/4.png",
+        "previewUrl": "templates/Preview/login_signup/4/4.html",
+        "downloadUrl": "templates/Download/login_signup/4.zip",
+        "tags": [
+            "3D Animation",
+            "Book Style",
+            "Gradient Design",
+            "Interactive Flip",
+            "Dual Panel"
+        ],
+        "tech": [
+            "HTML5",
+            "CSS3",
+            "JavaScript",
+            "CSS Transforms",
+            "Responsive Design"
+        ]
+    },
+    {
+        "id": "portfolio-1",
+        "title": "Wakanda Tech Lab Portfolio",
+        "description": "Afro-futuristic portfolio with vibranium holographic UI and Wakandan tech-inspired interactive elements.",
+        "category": "portfolio",
+        "thumbnail": "templates/Preview/portfolio/1/1.png",
+        "previewUrl": "templates/Preview/portfolio/1/1.html",
+        "downloadUrl": "templates/Download/portfolio/1.zip",
+        "tags": [
+            "Afro-futuristic",
+            "Holographic",
+            "Interactive",
+            "Vibranium-tech"
+        ],
+        "tech": [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "GSAP",
+            "CSS3 Animations"
+        ]
+    },
+    {
+        "id": "portfolio-2",
+        "title": "Time Traveler's ChronoDeck",
+        "description": "Doctor Strange inspired mystical portfolio with steampunk UI elements and temporal navigation design.",
+        "category": "portfolio",
+        "thumbnail": "templates/Preview/portfolio/2/2.png",
+        "previewUrl": "templates/Preview/portfolio/2/2.html",
+        "downloadUrl": "templates/Download/portfolio/2.zip",
+        "tags": [
+            "Mystical",
+            "Steampunk",
+            "Temporal",
+            "Interactive"
+        ],
+        "tech": [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Three.js",
+            "CSS Animations"
+        ]
+    },
+    {
+        "id": "portfolio-3",
+        "title": "Nature's Code: Forest of Forgotten Algorithms",
+        "description": "2D mystical forest environment portfolio with organic UI elements and nature-inspired design.",
+        "category": "portfolio",
+        "thumbnail": "templates/Preview/portfolio/3/3.png",
+        "previewUrl": "templates/Preview/portfolio/3/3.html",
+        "downloadUrl": "templates/Download/portfolio/3.zip",
+        "tags": [
+            "Nature-Inspired",
+            "2D UI",
+            "Organic",
+            "Minimal"
+        ],
+        "tech": [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "SVG Illustrations",
+            "CSS Animations"
+        ]
+    },
+    {
+        "id": "portfolio-4",
+        "title": "Blackout Portfolio: Student Edition",
+        "description": "Professional black-themed student portfolio with a minimal yet futuristic design aimed at maximizing interview selection chances. Includes animated sections, skill highlights, projects, and a strong call-to-action.",
+        "category": "portfolio",
+        "thumbnail": "templates/Preview/portfolio/4/4.png",
+        "previewUrl": "templates/Preview/portfolio/4/4.html",
+        "downloadUrl": "templates/Download/portfolio/4.zip",
+        "tags": [
+            "Black Theme",
+            "Professional",
+            "Minimal",
+            "Neon Accents"
+        ],
+        "tech": [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Scroll Animations",
+            "Responsive Design",
+            "Form Validation",
+            "FontAwesome Icons"
+        ]
+    },
+    {
+        "id": "portfolio-5",
+        "title": "CanvasGlow: Creative Tech Explorer Portfolio",
+        "description": "A soft pastel-colored, artistic student portfolio designed like a creative canvas. Ideal for UI/UX and frontend learners who want to show personality and passion through design.",
+        "category": "portfolio",
+        "thumbnail": "templates/Preview/portfolio/5/5.png",
+        "previewUrl": "templates/Preview/portfolio/5/5.html",
+        "downloadUrl": "templates/Download/portfolio/5.zip",
+        "tags": [
+            "Creative Portfolio",
+            "Pastel Theme",
+            "Student",
+            "Artistic",
+            "UI/UX Friendly"
+        ],
+        "tech": [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "SVG",
+            "GSAP Animations",
+            "Responsive Design"
+        ]
+    },
+    {
+        "id": "components-buttons-01",
+        "title": "NeonVerse UI Buttons Pack",
+        "description": "A collection of 50 ultra-modern animated buttons featuring neon glows, hover effects, glassmorphism, gradients, and micro-interactions. Ideal for dark UIs, dashboards, and futuristic websites.",
+        "category": "components",
+        "thumbnail": "templates/Preview/components/buttons/1.png",
+        "previewUrl": "templates/Preview/components/buttons/1.html",
+        "downloadUrl": "templates/Download/components/buttons.zip",
+        "tags": [
+            "Buttons",
+            "Neon",
+            "Animated",
+            "Micro-Interaction",
+            "Hover Effects"
+        ],
+        "tech": [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "CSS Animations"
+        ]
+    }
+    
+]

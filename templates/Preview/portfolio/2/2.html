@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChronoDeck | Time Traveler's Portfolio</title>
+    <style>
+        /* Base Styles & Color Scheme */
+        :root {
+            --brass: #B8860B;
+            --maroon: #800020;
+            --rich-black: #0A0A0F;
+            --parchment: #F5E7C1;
+            --midnight-blue: #191970;
+            --arcane-teal: #00CED1;
+            --spell-glow: rgba(0, 206, 209, 0.7);
+        }
+
+        @font-face {
+            font-family: 'Ancient Runes';
+            src: url('https://fonts.cdnfonts.com/css/magic-medieval') format('woff2');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--rich-black);
+            color: var(--parchment);
+            font-family: 'Times New Roman', serif;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 70% 30%, rgba(184, 134, 11, 0.05) 0%, transparent 25%),
+                url('https://www.transparenttextures.com/patterns/old-map.png');
+        }
+
+        /* Scrollbar - Steampunk Style */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background: var(--rich-black);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--brass);
+            border-radius: 6px;
+            border: 2px solid var(--maroon);
+        }
+
+        /* Navigation - Time Wheel */
+        .time-wheel {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 80px;
+            height: 80px;
+            background: url('https://i.imgur.com/JqgRZYl.png') center/cover no-repeat;
+            z-index: 100;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        .time-wheel:hover {
+            transform: translateY(-50%) rotate(180deg);
+            filter: drop-shadow(0 0 10px var(--brass));
+        }
+
+        /* Hero Section - Chrono Awakening */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: 
+                radial-gradient(circle at center, transparent 40%, var(--rich-black) 70%),
+                url('https://i.imgur.com/8Z7nLk9.jpg') center/cover no-repeat;
+        }
+
+        .floating-clock {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: url('https://i.imgur.com/JqgRZYl.png') center/contain no-repeat;
+            animation: float 8s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px var(--brass));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .rune-circle {
+            font-family: 'Ancient Runes', sans-serif;
+            font-size: 3rem;
+            color: var(--brass);
+            text-shadow: 0 0 10px var(--spell-glow);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .rune-circle::before, .rune-circle::after {
+            content: '✧';
+            position: absolute;
+            top: 50%;
+            font-size: 1.5rem;
+            animation: pulse 2s infinite alternate;
+        }
+
+        .rune-circle::before { left: -40px; }
+        .rune-circle::after { right: -40px; }
+
+        @keyframes pulse {
+            from { opacity: 0.3; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1.2); }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--parchment);
+            text-shadow: 0 0 10px var(--brass);
+            font-family: 'Ancient Runes', sans-serif;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--arcane-teal);
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .unlock-btn {
+            padding: 1rem 2rem;
+            background: transparent;
+            color: var(--brass);
+            border: 1px solid var(--brass);
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            z-index: 1;
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 1px;
+        }
+
+        .unlock-btn:hover {
+            color: var(--rich-black);
+            text-shadow: 0 0 5px var(--rich-black);
+        }
+
+        .unlock-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--brass), transparent);
+            transition: all 0.6s ease;
+            z-index: -1;
+        }
+
+        .unlock-btn:hover::before {
+            left: 100%;
+        }
+
+        /* About Section - Origin Scroll */
+        .about {
+            padding: 5rem 2rem;
+            position: relative;
+            background: 
+                linear-gradient(rgba(10, 10, 15, 0.9), rgba(10, 10, 15, 0.9)),
+                url('https://www.transparenttextures.com/patterns/paper.png');
+            border-top: 1px solid var(--brass);
+            border-bottom: 1px solid var(--brass);
+        }
+
+        .scroll-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            padding: 2rem;
+            background: var(--parchment);
+            color: var(--rich-black);
+            box-shadow: 0 0 30px rgba(184, 134, 11, 0.3);
+            border-radius: 2px;
+        }
+
+        .scroll-container::before, .scroll-container::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: url('https://i.imgur.com/XW7nQKL.png') repeat-x;
+        }
+
+        .scroll-container::before {
+            top: 0;
+            transform: rotate(180deg);
+        }
+
+        .scroll-container::after {
+            bottom: 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--maroon);
+            font-family: 'Ancient Runes', sans-serif;
+            border-bottom: 1px solid var(--brass);
+            padding-bottom: 0.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--brass);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--maroon);
+            border: 2px solid var(--brass);
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--maroon);
+            color: var(--parchment);
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--brass);
+        }
+
+        .download-btn:hover {
+            background: var(--brass);
+            color: var(--rich-black);
+        }
+
+        /* Skills Section - Clockwork Mechanica */
+        .skills {
+            padding: 5rem 2rem;
+            background: var(--rich-black);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skills::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://i.imgur.com/9zQ7JjS.png') center/contain no-repeat;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .skills-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: rgba(10, 10, 15, 0.8);
+            padding: 1.5rem;
+            border: 1px solid var(--brass);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                transparent,
+                transparent,
+                transparent,
+                var(--spell-glow),
+                transparent,
+                transparent
+            );
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) rotate(30deg); }
+        }
+
+        .skill-category h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--brass);
+            font-family: 'Ancient Runes', sans-serif;
+        }
+
+        .skill-item {
+            margin-bottom: 1rem;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: rgba(184, 134, 11, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--brass), var(--maroon));
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Projects Section - Chrono Relics Vault */
+        .projects {
+            padding: 5rem 2rem;
+            background: 
+                linear-gradient(rgba(10, 10, 15, 0.9), rgba(10, 10, 15, 0.9)),
+                url('https://www.transparenttextures.com/patterns/diagmonds.png');
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: rgba(25, 25, 112, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--brass);
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 206, 209, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 206, 209, 0.3);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 206, 209, 0.1),
+                rgba(184, 134, 11, 0.1)
+            );
+            z-index: -1;
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--brass);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--arcane-teal);
+        }
+
+        .project-desc {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tag {
+            padding: 0.3rem 0.6rem;
+            background: rgba(0, 206, 209, 0.1);
+            border: 1px solid rgba(0, 206, 209, 0.3);
+            border-radius: 4px;
+            font-size: 0.7rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            color: var(--brass);
+            border: 1px solid var(--brass);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: rgba(184, 134, 11, 0.2);
+            color: var(--arcane-teal);
+            border-color: var(--arcane-teal);
+        }
+
+        /* Experience Section - Career Compendium */
+        .experience {
+            padding: 5rem 2rem;
+            background: var(--rich-black);
+            position: relative;
+        }
+
+        .book {
+            max-width: 900px;
+            margin: 0 auto;
+            perspective: 2000px;
+        }
+
+        .page {
+            background: var(--parchment);
+            color: var(--rich-black);
+            padding: 2rem;
+            min-height: 500px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform-origin: left;
+            transition: transform 1s ease;
+            box-shadow: 0 0 20px rgba(184, 134, 11, 0.5);
+        }
+
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50px;
+            width: 2px;
+            background: var(--brass);
+        }
+
+        .job-entry {
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 70px;
+        }
+
+        .job-entry::before {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 10px;
+            width: 20px;
+            height: 20px;
+            background: var(--maroon);
+            border: 2px solid var(--brass);
+            border-radius: 50%;
+        }
+
+        .job-title {
+            font-size: 1.2rem;
+            color: var(--maroon);
+            margin-bottom: 0.5rem;
+        }
+
+        .job-company {
+            font-weight: bold;
+            color: var(--brass);
+            margin-bottom: 0.3rem;
+        }
+
+        .job-duration {
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            color: var(--midnight-blue);
+        }
+
+        .job-description {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .job-achievements {
+            list-style-type: none;
+        }
+
+        .job-achievements li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 0.3rem;
+        }
+
+        .job-achievements li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--brass);
+        }
+
+        .page-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .page-btn {
+            padding: 0.5rem 1rem;
+            background: var(--maroon);
+            color: var(--parchment);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .page-btn:hover {
+            background: var(--brass);
+            color: var(--rich-black);
+        }
+
+        /* Contact Section - Spellcasting Panel */
+        .contact {
+            padding: 5rem 2rem;
+            background: 
+                linear-gradient(rgba(10, 10, 15, 0.9), rgba(10, 10, 15, 0.9)),
+                url('https://www.transparenttextures.com/patterns/black-paper.png');
+            text-align: center;
+        }
+
+        .glyph-ring {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 2rem;
+            background: url('https://i.imgur.com/mX7nQKL.png') center/contain no-repeat;
+            position: relative;
+            animation: rotate 60s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(25, 25, 112, 0.2);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--brass);
+            box-shadow: 0 0 20px rgba(0, 206, 209, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--brass);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(10, 10, 15, 0.5);
+            border: 1px solid var(--brass);
+            border-radius: 4px;
+            color: var(--parchment);
+            font-family: 'Times New Roman', serif;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            padding: 0.8rem 2rem;
+            background: var(--maroon);
+            color: var(--parchment);
+            border: 1px solid var(--brass);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--brass);
+            color: var(--rich-black);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--maroon);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--parchment);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--brass);
+        }
+
+        .social-link:hover {
+            background: var(--brass);
+            color: var(--rich-black);
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            background: var(--rich-black);
+            border-top: 1px solid var(--brass);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .time-wheel {
+                width: 60px;
+                height: 60px;
+                right: 15px;
+            }
+            
+            .glyph-ring {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Time Wheel Navigation -->
+    <div class="time-wheel"></div>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="floating-clock"></div>
+        <div class="rune-circle">✧ ✧ ✧</div>
+        <h1>Dr. Chronos</h1>
+        <h2>Time-Based UX Engineer | Arcane Interface Designer</h2>
+        <button class="unlock-btn">Unlock My Timeline</button>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">The Origin Scroll</h2>
+        <div class="scroll-container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Chronicles of Time</h2>
+                    <p>I am a temporal designer who bends the fabric of spacetime to create interfaces that exist beyond linear perception. My journey began in the ancient libraries of Alexandria, where I first discovered the magic of visual storytelling.</p>
+                    <p>Over centuries, I've mastered the arts of both mystical design and steampunk engineering, blending them into a unique discipline I call "ChronoDesign".</p>
+                    <a href="#" class="download-btn">Download Temporal CV</a>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>1347 - Present</h3>
+                        <p>Master of Temporal Interfaces</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>1204 - 1347</h3>
+                        <p>Apprentice to Leonardo da Vinci</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>876 - 1204</h3>
+                        <p>Byzantine Scroll Illuminator</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <h2 class="section-title">Clockwork Mechanica</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Temporal Frontend</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>HTML/CSS</span>
+                        <span>98%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 98%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>JavaScript</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>React</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Arcane Backend</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Node.js</span>
+                        <span>88%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 88%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Python</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>SQL</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Mystical Tools</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Git</span>
+                        <span>92%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 92%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Figma</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Blender</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 75%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <h2 class="section-title">Chrono Relics Vault</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="https://source.unsplash.com/random/600x400/?steampunk,ui" alt="Temporal Dashboard" class="project-img">
+                <div class="project-content">
+                    <h3 class="project-title">Temporal Dashboard</h3>
+                    <p class="project-desc">A time-bending interface that allows users to navigate multiple timelines simultaneously.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Three.js</span>
+                        <span class="tech-tag">GSAP</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Live Demo</a>
+                        <a href="#" class="project-link">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <img src="https://source.unsplash.com/random/600x400/?clock,machine" alt="Steampunk Scheduler" class="project-img">
+                <div class="project-content">
+                    <h3 class="project-title">Steampunk Scheduler</h3>
+                    <p class="project-desc">A mechanical time management system with brass UI components and gear-based interactions.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Vue.js</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">WebGL</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Live Demo</a>
+                        <a href="#" class="project-link">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <img src="https://source.unsplash.com/random/600x400/?magic,book" alt="Arcane Library" class="project-img">
+                <div class="project-content">
+                    <h3 class="project-title">Arcane Library</h3>
+                    <p class="project-desc">An interactive book of spells with page-flip animations and rune-based navigation.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Canvas</span>
+                        <span class="tech-tag">SVG</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Live Demo</a>
+                        <a href="#" class="project-link">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <h2 class="section-title">The Career Compendium</h2>
+        <div class="book">
+            <div class="page">
+                <div class="job-entry">
+                    <h3 class="job-title">Chief Temporal Designer</h3>
+                    <div class="job-company">The Timekeepers' Guild</div>
+                    <div class="job-duration">1842 - Present</div>
+                    <div class="job-description">Leading a team of chrono-designers in creating interfaces that transcend linear time perception.</div>
+                    <ul class="job-achievements">
+                        <li>Developed the first non-linear UI framework</li>
+                        <li>Pioneered temporal gesture controls</li>
+                        <li>Created the Chrono Design System</li>
+                    </ul>
+                </div>
+                
+                <div class="job-entry">
+                    <h3 class="job-title">Steampunk Engineer</h3>
+                    <div class="job-company">Brass & Gears Collective</div>
+                    <div class="job-duration">1765 - 1842</div>
+                    <div class="job-description">Designed mechanical interfaces and automata for industrial and artistic applications.</div>
+                    <ul class="job-achievements">
+                        <li>Built the first analytical engine UI</li>
+                        <li>Created blueprint-based design system</li>
+                        <li>Developed gear-based navigation patterns</li>
+                    </ul>
+                </div>
+                
+                <div class="page-controls">
+                    <button class="page-btn">Previous Era</button>
+                    <button class="page-btn">Next Era</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Spellcasting Panel</h2>
+        <div class="glyph-ring"></div>
+        <form class="contact-form">
+            <div class="form-group">
+                <label for="name">Your True Name</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Sending Crystal</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message Scroll</label>
+                <textarea id="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Cast Message</button>
+        </form>
+        
+        <div class="social-links">
+            <a href="#" class="social-link">L</a>
+            <a href="#" class="social-link">G</a>
+            <a href="#" class="social-link">D</a>
+            <a href="#" class="social-link">T</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p class="copyright">© <span id="year"></span> Dr. Chronos. All timelines reserved.</p>
+    </footer>
+    
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Time wheel navigation
+        const timeWheel = document.querySelector('.time-wheel');
+        const sections = document.querySelectorAll('section');
+        let currentSection = 0;
+        
+        timeWheel.addEventListener('click', () => {
+            currentSection = (currentSection + 1) % sections.length;
+            sections[currentSection].scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Page flip animation for experience section
+        const page = document.querySelector('.page');
+        const pageBtns = document.querySelectorAll('.page-btn');
+        
+        pageBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                page.style.transform = 'rotateY(-180deg)';
+                setTimeout(() => {
+                    page.style.transform = 'rotateY(0deg)';
+                }, 1000);
+            });
+        });
+        
+        // Form submission effect
+        const form = document.querySelector('.contact-form');
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const submitBtn = form.querySelector('.submit-btn');
+            submitBtn.textContent = 'Message Sent Through Time!';
+            submitBtn.style.background = 'var(--arcane-teal)';
+            
+            setTimeout(() => {
+                form.reset();
+                submitBtn.textContent = 'Cast Message';
+                submitBtn.style.background = 'var(--maroon)';
+            }, 3000);
+        });
+        
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const floatingClock = document.querySelector('.floating-clock');
+            
+            if (floatingClock) {
+                floatingClock.style.transform = `translateY(${scrollY * 0.2}px) rotate(${scrollY * 0.1}deg)`;
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key >= '1' && e.key <= '6') {
+                const sectionIndex = parseInt(e.key) - 1;
+                if (sectionIndex < sections.length) {
+                    sections[sectionIndex].scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
