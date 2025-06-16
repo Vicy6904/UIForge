@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20 Animated Navigation Bars</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            padding-bottom: 50px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin: 30px 0;
+            color: #444;
+        }
+        
+        .nav-demo {
+            margin: 40px 0;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .demo-title {
+            margin-bottom: 20px;
+            color: #555;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        
+        .demo-description {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* Common nav styles */
+        nav {
+            transition: all 0.3s ease;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        /* Mobile menu toggle */
+        .mobile-menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+        }
+        
+        /* ------------------------- */
+        /* INDIVIDUAL NAVIGATION STYLES */
+        /* ------------------------- */
+        
+        /* NAV 1: Gradient Underline */
+        .nav-1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 30px;
+            border-radius: 8px;
+        }
+        
+        .nav-1 ul {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .nav-1 a {
+            color: white;
+            font-weight: 500;
+            padding: 10px 0;
+            position: relative;
+        }
+        
+        .nav-1 a:hover {
+            opacity: 0.8;
+        }
+        
+        .nav-1 a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #f6d365 0%, #fda085 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-1 a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-1 .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 1;
+        }
+        
+        .nav-1 .dropdown:hover .dropdown-content {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .nav-1 .dropdown-content a {
+            color: #333;
+            padding: 10px 15px;
+            display: block;
+        }
+        
+        .nav-1 .dropdown-content a:hover {
+            background: #f5f5f5;
+        }
+        
+        /* NAV 2: Slide-In Sidebar */
+        .nav-2-container {
+            display: flex;
+            min-height: 300px;
+        }
+        
+        .nav-2 {
+            width: 60px;
+            background: #2c3e50;
+            transition: width 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .nav-2.expanded {
+            width: 250px;
+        }
+        
+        .nav-2 ul {
+            padding-top: 20px;
+        }
+        
+        .nav-2 li {
+            padding: 15px 20px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .nav-2 li:hover {
+            background: #34495e;
+        }
+        
+        .nav-2 i {
+            font-size: 20px;
+            color: white;
+            margin-right: 15px;
+            min-width: 20px;
+        }
+        
+        .nav-2 span {
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease 0.2s;
+        }
+        
+        .nav-2.expanded span {
+            opacity: 1;
+        }
+        
+        .nav-2-toggle {
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        
+        /* NAV 3: Morphing Hamburger */
+        .nav-3 {
+            background: #333;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-3-brand {
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .nav-3-toggle {
+            width: 30px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        .nav-3-toggle span {
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: white;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-3-toggle span:nth-child(1) {
+            top: 0;
+        }
+        
+        .nav-3-toggle span:nth-child(2) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .nav-3-toggle span:nth-child(3) {
+            bottom: 0;
+        }
+        
+        .nav-3-toggle.active span:nth-child(1) {
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+        }
+        
+        .nav-3-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .nav-3-toggle.active span:nth-child(3) {
+            bottom: 50%;
+            transform: translateY(50%) rotate(-45deg);
+        }
+        
+        .nav-3-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: #333;
+            padding: 80px 20px 20px;
+            transition: right 0.3s ease;
+            z-index: 999;
+        }
+        
+        .nav-3-menu.active {
+            right: 0;
+        }
+        
+        .nav-3-menu ul {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .nav-3-menu a {
+            color: white;
+            font-size: 1.1rem;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .nav-3-menu a:hover {
+            background: #444;
+        }
+        
+        /* NAV 4: Glassmorphism Nav */
+        .nav-4 {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .nav-4 ul {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+        
+        .nav-4 a {
+            color: #333;
+            font-weight: 500;
+            padding: 10px 15px;
+            position: relative;
+            border-radius: 8px;
+        }
+        
+        .nav-4 a:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .nav-4 .active {
+            background: rgba(255, 255, 255, 0.4);
+            font-weight: 600;
+        }
+        
+        /* NAV 5: Bouncing Dropdown */
+        .nav-5 {
+            background: #e74c3c;
+            padding: 15px;
+        }
+        
+        .nav-5 ul {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .nav-5 a {
+            color: white;
+            font-weight: 500;
+            padding: 10px 15px;
+        }
+        
+        .nav-5 .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 200px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: bounceIn 0.4s ease;
+        }
+        
+        .nav-5 .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .nav-5 .dropdown-content a {
+            color: #333;
+            padding: 10px 15px;
+            display: block;
+        }
+        
+        .nav-5 .dropdown-content a:hover {
+            background: #f5f5f5;
+        }
+        
+        /* NAV 6: Vertical Tabs */
+        .nav-6-container {
+            display: flex;
+            min-height: 300px;
+        }
+        
+        .nav-6 {
+            width: 200px;
+            background: #34495e;
+        }
+        
+        .nav-6 ul {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .nav-6 li {
+            padding: 15px 20px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .nav-6 li:hover, .nav-6 li.active {
+            background: #2c3e50;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .nav-6-content {
+            flex: 1;
+            padding: 20px;
+            background: white;
+        }
+        
+        /* NAV 7: Circular Menu */
+        .nav-7 {
+            position: relative;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .nav-7-toggle {
+            width: 60px;
+            height: 60px;
+            background: #9b59b6;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .nav-7-menu {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: rgba(155, 89, 182, 0.7);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .nav-7.active .nav-7-menu {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .nav-7.active .nav-7-menu:nth-child(2) {
+            transform: translateY(-100px);
+            background: #3498db;
+        }
+        
+        .nav-7.active .nav-7-menu:nth-child(3) {
+            transform: translateX(100px);
+            background: #e74c3c;
+        }
+        
+        .nav-7.active .nav-7-menu:nth-child(4) {
+            transform: translateY(100px);
+            background: #2ecc71;
+        }
+        
+        .nav-7.active .nav-7-menu:nth-child(5) {
+            transform: translateX(-100px);
+            background: #f1c40f;
+        }
+        
+        /* NAV 8: Mega Menu */
+        .nav-8 {
+            background: #2c3e50;
+            padding: 0 30px;
+        }
+        
+        .nav-8 ul {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-8 > ul > li {
+            position: relative;
+        }
+        
+        .nav-8 a {
+            color: white;
+            padding: 20px 15px;
+            display: block;
+            font-weight: 500;
+        }
+        
+        .nav-8 > ul > li > a:hover {
+            background: #34495e;
+        }
+        
+        .nav-8 .mega-menu {
+            position: absolute;
+            left: 0;
+            width: 100vw;
+            background: white;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            transform: translateY(20px);
+        }
+        
+        .nav-8 > ul > li:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .nav-8 .mega-menu h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .nav-8 .mega-menu ul {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .nav-8 .mega-menu a {
+            color: #7f8c8d;
+            padding: 5px 0;
+        }
+        
+        .nav-8 .mega-menu a:hover {
+            color: #2c3e50;
+        }
+        
+        /* NAV 9: Sticky Shrink Nav */
+        .nav-9 {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 25px 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .nav-9.shrink {
+            padding: 15px 30px;
+        }
+        
+        .nav-9-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .nav-9-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-9.shrink .nav-9-brand {
+            font-size: 1.2rem;
+        }
+        
+        .nav-9 ul {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-9 a {
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .nav-9 a:hover {
+            color: #e74c3c;
+        }
+        
+        /* NAV 10: Animated Tab Bar */
+        .nav-10 {
+            background: white;
+            padding: 0 30px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .nav-10 ul {
+            display: flex;
+            position: relative;
+        }
+        
+        .nav-10 li {
+            flex: 1;
+            text-align: center;
+            padding: 20px 0;
+            z-index: 1;
+        }
+        
+        .nav-10 a {
+            color: #7f8c8d;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .nav-10 i {
+            font-size: 20px;
+        }
+        
+        .nav-10 .active a {
+            color: #e74c3c;
+        }
+        
+        .nav-10-indicator {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 5px;
+            background: #e74c3c;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        /* NAV 11: Fullscreen Overlay */
+        .nav-11 {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px;
+        }
+        
+        .nav-11-toggle {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .nav-11-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .nav-11-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .nav-11-overlay ul {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .nav-11-overlay a {
+            color: white;
+            font-size: 2rem;
+            position: relative;
+        }
+        
+        .nav-11-overlay a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-11-overlay a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-11-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        
+        /* NAV 12: Hover Underline */
+        .nav-12 {
+            background: white;
+            padding: 20px 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-12 ul {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+        
+        .nav-12 a {
+            color: #333;
+            font-weight: 500;
+            position: relative;
+            padding: 10px 0;
+        }
+        
+        .nav-12 a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #3498db;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-12 a:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        /* NAV 13: Split Screen */
+        .nav-13 {
+            display: flex;
+            height: 60px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-13-brand {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #333;
+            background: #f5f5f5;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-13-brand:hover {
+            background: #eee;
+        }
+        
+        .nav-13-menu {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .nav-13 ul {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-13 a {
+            color: #333;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .nav-13 a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #e74c3c;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-13 a:hover::after {
+            width: 100%;
+        }
+        
+        /* NAV 14: Curved Background */
+        .nav-14 {
+            background: #3498db;
+            padding: 30px 50px 50px;
+            border-bottom-left-radius: 50% 20%;
+            border-bottom-right-radius: 50% 20%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-14::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.2;
+        }
+        
+        .nav-14-container {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .nav-14-brand {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-14 ul {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-14 a {
+            color: white;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-14 a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-14 a:hover::after {
+            width: 100%;
+        }
+        
+        /* NAV 15: Diagonal Nav */
+        .nav-15 {
+            background: #e74c3c;
+            padding: 20px 0;
+            transform: skewY(-3deg);
+            margin-top: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-15-container {
+            transform: skewY(3deg);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .nav-15 ul {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+        
+        .nav-15 a {
+            color: white;
+            font-weight: 500;
+            padding: 10px 15px;
+            position: relative;
+        }
+        
+        .nav-15 a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid white;
+            transform: scale(0);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-15 a:hover::before {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        /* NAV 16: Floating Dots */
+        .nav-16 {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .nav-16 ul {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+        
+        .nav-16 li {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-16 a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+        
+        .nav-16 i {
+            width: 40px;
+            height: 40px;
+            background: #f5f5f5;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-16 .active i {
+            background: #3498db;
+            color: white;
+            transform: translateY(-10px);
+        }
+        
+        .nav-16 .active a {
+            color: #3498db;
+        }
+        
+        /* NAV 17: Gradient Border */
+        .nav-17 {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .nav-17::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #ff00cc, #3333ff);
+            border-radius: 12px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-17:hover::before {
+            opacity: 1;
+        }
+        
+        .nav-17 ul {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .nav-17 a {
+            color: #333;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-17 a:hover {
+            background: rgba(0,0,0,0.05);
+        }
+        
+        /* NAV 18: Minimal Line */
+        .nav-18 {
+            background: white;
+            padding: 20px 30px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .nav-18-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .nav-18-brand {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #333;
+        }
+        
+        .nav-18 ul {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-18 a {
+            color: #7f8c8d;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .nav-18 a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #333;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-18 a:hover::after {
+            width: 100%;
+        }
+        
+        /* NAV 19: Animated Background */
+        .nav-19 {
+            background: #333;
+            padding: 15px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-19 ul {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-19 a {
+            color: white;
+            font-weight: 500;
+            padding: 10px 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-19-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100%;
+            background: #e74c3c;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+        
+        .nav-19 li:hover .nav-19-bg {
+            opacity: 1;
+        }
+        
+        /* NAV 20: 3D Depth */
+        .nav-20 {
+            background: #3498db;
+            padding: 20px 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .nav-20 ul {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .nav-20 li {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-20 li:hover {
+            transform: translateZ(20px);
+        }
+        
+        .nav-20 a {
+            color: white;
+            font-weight: 500;
+            padding: 15px 25px;
+            display: block;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .nav-20 a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateZ(10px);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .nav-1 ul, .nav-4 ul, .nav-5 ul, .nav-8 ul, .nav-12 ul, .nav-13 ul, .nav-14 ul, .nav-15 ul, .nav-17 ul, .nav-19 ul, .nav-20 ul {
+                flex-direction: column;
+                gap: 10px;
+                display: none;
+            }
+            
+            .nav-1 ul.active, .nav-4 ul.active, .nav-5 ul.active, .nav-8 ul.active, .nav-12 ul.active, .nav-13 ul.active, .nav-14 ul.active, .nav-15 ul.active, .nav-17 ul.active, .nav-19 ul.active, .nav-20 ul.active {
+                display: flex;
+            }
+            
+            .nav-1 .dropdown-content, .nav-5 .dropdown-content, .nav-8 .mega-menu {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+            }
+            
+            .nav-6-container {
+                flex-direction: column;
+            }
+            
+            .nav-6 {
+                width: 100%;
+            }
+            
+            .nav-10, .nav-16 {
+                border-radius: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>20 Unique Animated Navigation Bars</h1>
+        
+        <!-- NAV 1 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">1. Gradient Underline Nav</h2>
+            <p class="demo-description">Navbar with gradient background and animated underline indicators</p>
+            <nav class="nav-1">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li class="dropdown">
+                        <a href="#">Services <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="#">Web Design</a>
+                            <a href="#">Development</a>
+                            <a href="#">SEO</a>
+                        </div>
+                    </li>
+                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- NAV 2 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">2. Slide-In Sidebar</h2>
+            <p class="demo-description">Collapsible sidebar with smooth expanding animation</p>
+            <div class="nav-2-container">
+                <nav class="nav-2">
+                    <ul>
+                        <li>
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>Messages</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </li>
+                    </ul>
+                </nav>
+                <button class="nav-2-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- NAV 3 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">3. Morphing Hamburger Menu</h2>
+            <p class="demo-description">Hamburger icon transforms to close icon with sliding menu</p>
+            <nav class="nav-3">
+                <div class="nav-3-brand">Logo</div>
+                <div class="nav-3-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="nav-3-menu">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- NAV 4 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">4. Glassmorphism Nav</h2>
+            <p class="demo-description">Frosted glass effect with subtle background blur</p>
+            <nav class="nav-4">
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Discover</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- NAV 5 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">5. Bouncing Dropdown</h2>
+            <p class="demo-description">Dropdown menus with playful bounce animation</p>
+            <nav class="nav-5">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#">Products <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="#">Web Templates</a>
+                            <a href="#">UI Kits</a>
+                            <a href="#">Plugins</a>
+                        </div>
+                    </li>
+                    <li><a href="#">Blog</a></li>
+                    <li class="dropdown">
+                        <a href="#">Resources <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="#">Tutorials</a>
+                            <a href="#">Documentation</a>
+                            <a href="#">Support</a>
+                        </div>
+                    </li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- NAV 6 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">6. Vertical Tabs</h2>
+            <p class="demo-description">Side navigation with active tab indicator</p>
+            <div class="nav-6-container">
+                <nav class="nav-6">
+                    <ul>
+                        <li class="active">Dashboard</li>
+                        <li>Projects</li>
+                        <li>Team</li>
+                        <li>Calendar</li>
+                        <li>Documents</li>
+                    </ul>
+                </nav>
+                <div class="nav-6-content">
+                    <h3>Dashboard Content</h3>
+                    <p>This area would display content based on the selected tab.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- NAV 7 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">7. Circular Menu</h2>
+            <p class="demo-description">Radial menu that expands from a central button</p>
+            <nav class="nav-7">
+                <div class="nav-7-toggle">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="nav-7-menu">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="nav-7-menu">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="nav-7-menu">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="nav-7-menu">
+                    <i class="fas fa-cog"></i>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- NAV 8 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">8. Mega Menu</h2>
+            <p class="demo-description">Full-width dropdown with multiple content sections</p>
+            <nav class="nav-8">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li>
+                        <a href="#">Products</a>
+                        <div class="mega-menu">
+                            <div>
+                                <h3>Web Design</h3>
+                                <ul>
+                                    <li><a href="#">Templates</a></li>
+                                    <li><a href="#">UI Kits</a></li>
+                                    <li><a href="#">Icons</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3>Development</h3>
+                                <ul>
+                                    <li><a href="#">Frameworks</a></li>
+                                    <li><a href="#">Plugins</a></li>
+                                    <li><a href="#">Tools</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3>Resources</h3>
+                                <ul>
+                                    <li><a href="#">Tutorials</a></li>
+                                    <li><a href="#">Docs</a></li>
+                                    <li><a href="#">Blog</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3>Support</h3>
+                                <ul>
+                                    <li><a href="#">Help Center</a></li>
+                                    <li><a href="#">Community</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- NAV 9 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">9. Sticky Shrink Nav</h2>
+            <p class="demo-description">Navbar that shrinks when scrolling down the page</p>
+            <nav class="nav-9">
+                <div class="nav-9-container">
+                    <div class="nav-9-brand">YourLogo</div>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div style="height: 1000px;"></div>
+        </div>
+        
+        <!-- NAV 10 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">10. Animated Tab Bar</h2>
+            <p class="demo-description">Bottom tab bar with sliding indicator</p>
+            <nav class="nav-10">
+                <ul>
+                    <li class="active">
+                        <a href="#">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-search"></i>
+                            <span>Search</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-heart"></i>
+                            <span>Favorites</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="nav-10-indicator" style="width: 25%; left: 0%;"></div>
+            </nav>
+        </div>
+        
+        <!-- NAV 11 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">11. Fullscreen Overlay</h2>
+            <p class="demo-description">Click to reveal fullscreen navigation menu</p>
+            <nav class="nav-11">
+                <button class="nav-11-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="nav-11-overlay">
+                    <div class="nav-11-close">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- NAV 12 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">12. Hover Underline</h2>
+            <p class="demo-description">Links with directional underline animation</p>
+            <nav class="nav-12">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- NAV 13 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">13. Split Screen</h2>
+            <p class="demo-description">Brand on left, navigation on right with divider</p>
+            <nav class="nav-13">
+                <div class="nav-13-brand">Brand</div>
+                <div class="nav-13-menu">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Work</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- NAV 14 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">14. Curved Background</h2>
+            <p class="demo-description">Navbar with curved bottom edge and subtle texture</p>
+            <nav class="nav-14">
+                <div class="nav-14-container">
+                    <div class="nav-14-brand">YourBrand</div>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- NAV 15 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">15. Diagonal Nav</h2>
+            <p class="demo-description">Navigation bar with diagonal cut design</p>
+            <nav class="nav-15">
+                <div class="nav-15-container">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- NAV 16 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">16. Floating Dots</h2>
+            <p class="demo-description">Tab bar with floating dot indicators</p>
+            <nav class="nav-16">
+                <ul>
+                    <li class="active">
+                        <a href="#">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-search"></i>
+                            <span>Search</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Cart</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- NAV 17 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">17. Gradient Border</h2>
+            <p class="demo-description">Navbar with animated gradient border effect</p>
+            <nav class="nav-17">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- NAV 18 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">18. Minimal Line</h2>
+            <p class="demo-description">Clean design with subtle hover effects</p>
+            <nav class="nav-18">
+                <div class="nav-18-container">
+                    <div class="nav-18-brand">Minimal</div>
+                    <ul>
+                        <li><a href="#">Work</a></li>
+                        <li><a href="#">Studio</a></li>
+                        <li><a href="#">Journal</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- NAV 19 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">19. Animated Background</h2>
+            <p class="demo-description">Moving background highlight on hover</p>
+            <nav class="nav-19">
+                <ul>
+                    <li>
+                        <a href="#">Home</a>
+                        <div class="nav-19-bg"></div>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                        <div class="nav-19-bg"></div>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                        <div class="nav-19-bg"></div>
+                    </li>
+                    <li>
+                        <a href="#">Portfolio</a>
+                        <div class="nav-19-bg"></div>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                        <div class="nav-19-bg"></div>
+                    </li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- NAV 20 -->
+        <div class="nav-demo">
+            <h2 class="demo-title">20. 3D Depth</h2>
+            <p class="demo-description">Navigation items with 3D hover effect</p>
+            <nav class="nav-20">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <script>
+        // NAV 1: Mobile toggle
+        document.querySelector('.nav-1 .mobile-menu-toggle').addEventListener('click', function() {
+            const ul = document.querySelector('.nav-1 ul');
+            ul.classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-times');
+            this.querySelector('i').classList.toggle('fa-bars');
+        });
+        
+        // NAV 2: Sidebar toggle
+        document.querySelector('.nav-2-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-2').classList.toggle('expanded');
+        });
+        
+        // NAV 3: Hamburger toggle
+        document.querySelector('.nav-3-toggle').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.querySelector('.nav-3-menu').classList.toggle('active');
+        });
+        
+        // NAV 4: Mobile toggle
+        document.querySelector('.nav-4 .mobile-menu-toggle').addEventListener('click', function() {
+            const ul = document.querySelector('.nav-4 ul');
+            ul.classList.toggle('active');
+            this.classList.toggle('fa-times');
+            this.classList.toggle('fa-bars');
+        });
+        
+        // NAV 5: Mobile toggle
+        document.querySelector('.nav-5 .mobile-menu-toggle').addEventListener('click', function() {
+            const ul = document.querySelector('.nav-5 ul');
+            ul.classList.toggle('active');
+            this.classList.toggle('fa-times');
+            this.classList.toggle('fa-bars');
+        });
+        
+        // NAV 6: Tab switching
+        const nav6Items = document.querySelectorAll('.nav-6 li');
+        nav6Items.forEach(item => {
+            item.addEventListener('click', function() {
+                nav6Items.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // NAV 7: Circular menu toggle
+        document.querySelector('.nav-7-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-7').classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-times');
+            this.querySelector('i').classList.toggle('fa-plus');
+        });
+        
+        // NAV 8: Mobile toggle
+        document.querySelector('.nav-8 .mobile-menu-toggle').addEventListener('click', function() {
+            const ul = document.querySelector('.nav-8 ul');
+            ul.classList.toggle('active');
+            this.classList.toggle('fa-times');
+            this.classList.toggle('fa-bars');
+        });
+        
+        // NAV 9: Shrink on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.nav-9');
+            if (window.scrollY > 50) {
+                nav.classList.add('shrink');
+            } else {
+                nav.classList.remove('shrink');
+            }
+        });
+        
+        // NAV 10: Tab switching
+        const nav10Items = document.querySelectorAll('.nav-10 li');
+        const nav10Indicator = document.querySelector('.nav-10-indicator');
+        
+        nav10Items.forEach((item, index) => {
+            item.addEventListener('click', function() {
+                nav10Items.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                const width = 100 / nav10Items.length;
+                const left = index * width;
+                nav10Indicator.style.width = `${width}%`;
+                nav10Indicator.style.left = `${left}%`;
+            });
+        });
+        
+        // NAV 11: Overlay toggle
+        document.querySelector('.nav-11-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-11-overlay').classList.add('active');
+        });
+        
+        document.querySelector('.nav-11-close').addEventListener('click', function() {
+            document.querySelector('.nav-11-overlay').classList.remove('active');
+        });
+        
+        // NAV 12: Mobile toggle
+        document.querySelector('.nav-12 .mobile-menu-toggle').addEventListener('click', function() {
+            const ul = document.querySelector('.nav-12 ul');
+            ul.classList.toggle('active');
+            this.classList.toggle('fa-times');
+            this.classList.toggle('fa-bars');
+        });
+        
+        // NAV 14: Mobile toggle
+        document.querySelector('.nav-14 .mobile-menu-toggle').addEventListener('click', function() {
+            const ul = document.querySelector('.nav-14 ul');
+            ul.classList.toggle('active');
+            this.classList.toggle('fa-times');
+            this.classList.toggle('fa-bars');
+        });
+        
+        // NAV 15: Mobile toggle
+        document.querySelector('.nav-15 .mobile-menu-toggle').addEventListener('click', function() {
+            const ul = document.querySelector('.nav-15 ul');
+            ul.classList.toggle('active');
+            this.classList.toggle('fa-times');
+            this.classList.toggle('fa-bars');
+        });
+        
+        // NAV 16: Tab switching
+        const nav16Items = document.querySelectorAll('.nav-16 li');
+        nav16Items.forEach(item => {
+            item.addEventListener('click', function() {
+                nav16Items.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // NAV 17: Mobile toggle
+        document.querySelector('.nav-17 .mobile-menu-toggle').addEventListener('click', function() {
+            const ul = document.querySelector('.nav-17 ul');
+            ul.classList.toggle('active');
+            this.classList.toggle('fa-times');
+            this.classList.toggle('fa-bars');
+        });
+        
+        // NAV 19: Mobile toggle
+        document.querySelector('.nav-19 .mobile-menu-toggle').addEventListener('click', function() {
+            const ul = document.querySelector('.nav-19 ul');
+            ul.classList.toggle('active');
+            this.classList.toggle('fa-times');
+            this.classList.toggle('fa-bars');
+        });
+        
+        // NAV 20: Mobile toggle
+        document.querySelector('.nav-20 .mobile-menu-toggle').addEventListener('click', function() {
+            const ul = document.querySelector('.nav-20 ul');
+            ul.classList.toggle('active');
+            this.classList.toggle('fa-times');
+            this.classList.toggle('fa-bars');
+        });
+        
+        // NAV 19: Animated background position
+        const nav19Items = document.querySelectorAll('.nav-19 li');
+        nav19Items.forEach(item => {
+            const bg = item.querySelector('.nav-19-bg');
+            
+            item.addEventListener('mouseenter', function() {
+                const itemRect = this.getBoundingClientRect();
+                const navRect = document.querySelector('.nav-19').getBoundingClientRect();
+                const left = itemRect.left - navRect.left;
+                
+                bg.style.width = `${itemRect.width}px`;
+                bg.style.left = `${left}px`;
+            });
+        });
+    </script>
+</body>
+</html>
