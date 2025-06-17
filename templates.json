@@ -246,8 +246,8 @@
         "title": "NavMotions UI Navbar Pack",
         "description": "A curated pack of 20 modern, animated navigation bars including top navs, sidebars, hamburger menus, dropdowns, and responsive transitions. Perfect for dashboards, websites, and mobile UIs.",
         "category": "components",
-        "thumbnail": "templates/Preview/components/navbar/1.png",
-        "previewUrl": "templates/Preview/components/navbar/1.html",
+        "thumbnail": "templates/Preview/components/navbar/2.png",
+        "previewUrl": "templates/Preview/components/navbar/2.html",
         "downloadUrl": "templates/Download/components/navbar.zip",
         "tags": [
             "Navbar",
