@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20 Badass Navbar Designs</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        section {
+            margin-bottom: 50px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+        
+        /* Navbar 1: Cyberpunk Neon */
+        .navbar-1 {
+            background-color: #0a0a0a;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #00f0ff;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+        }
+        
+        .navbar-1 .logo {
+            color: #00f0ff;
+            font-size: 24px;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
+            letter-spacing: 2px;
+        }
+        
+        .navbar-1 .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .navbar-1 .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-1 .nav-links a:hover {
+            color: #00f0ff;
+        }
+        
+        .navbar-1 .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #00f0ff;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-1 .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Navbar 2: Brutalist Black & White */
+        .navbar-2 {
+            background-color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 3px solid #000;
+        }
+        
+        .navbar-2 .logo {
+            color: #000;
+            font-size: 24px;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+        
+        .navbar-2 .nav-links {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .navbar-2 .nav-links a {
+            color: #000;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 10px 15px;
+            background: #fff;
+            border: 2px solid #000;
+            transition: all 0.2s ease;
+        }
+        
+        .navbar-2 .nav-links a:hover {
+            background: #000;
+            color: #fff;
+        }
+        
+        /* Navbar 3: Glossy Gradient */
+        .navbar-3 {
+            background: linear-gradient(90deg, #ff4d4d, #f9cb28);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-3 .logo {
+            color: #fff;
+            font-size: 26px;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .navbar-3 .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .navbar-3 .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-3 .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Navbar 4: Dark Tech */
+        .navbar-4 {
+            background-color: #121212;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+        
+        .navbar-4 .logo {
+            color: #4dff4d;
+            font-size: 22px;
+            font-weight: 500;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .navbar-4 .logo span {
+            color: #fff;
+        }
+        
+        .navbar-4 .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .navbar-4 .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-4 .nav-links a:hover {
+            color: #4dff4d;
+        }
+        
+        .navbar-4 .nav-links a::before {
+            content: '> ';
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .navbar-4 .nav-links a:hover::before {
+            opacity: 1;
+        }
+        
+        /* Navbar 5: Minimal White with Underline */
+        .navbar-5 {
+            background-color: #fff;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .navbar-5 .logo {
+            color: #333;
+            font-size: 22px;
+            font-weight: 700;
+        }
+        
+        .navbar-5 .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .navbar-5 .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .navbar-5 .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #333;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-5 .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .navbar-5 .nav-links a.active {
+            color: #333;
+        }
+        
+        .navbar-5 .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        /* Navbar 6: Glass Morphism */
+        .navbar-6 {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-6 .logo {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .navbar-6 .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .navbar-6 .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-6 .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Navbar 7: Retro Gaming */
+        .navbar-7 {
+            background-color: #2a2139;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 4px solid #ff2d75;
+            border-bottom: 4px solid #ff2d75;
+        }
+        
+        .navbar-7 .logo {
+            color: #ff2d75;
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: 3px 3px 0 #ffd166;
+        }
+        
+        .navbar-7 .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .navbar-7 .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            padding: 8px 12px;
+            background: #4a3a6a;
+            border: 2px solid #ffd166;
+            transition: all 0.2s ease;
+        }
+        
+        .navbar-7 .nav-links a:hover {
+            background: #ff2d75;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 0 #ffd166;
+        }
+        
+        /* Navbar 8: Industrial Metal */
+        .navbar-8 {
+            background-color: #2c2c2c;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 5px solid #8b8b8b;
+            border-bottom: 5px solid #8b8b8b;
+        }
+        
+        .navbar-8 .logo {
+            color: #d4d4d4;
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .navbar-8 .logo span {
+            color: #b8860b;
+        }
+        
+        .navbar-8 .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .navbar-8 .nav-links a {
+            color: #d4d4d4;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 0;
+            position: relative;
+        }
+        
+        .navbar-8 .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: #b8860b;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-8 .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Navbar 9: Futuristic Hologram */
+        .navbar-9 {
+            background-color: rgba(10, 25, 47, 0.8);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
+        }
+        
+        .navbar-9 .logo {
+            color: #64ffda;
+            font-size: 22px;
+            font-weight: 500;
+        }
+        
+        .navbar-9 .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .navbar-9 .nav-links a {
+            color: #ccd6f6;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .navbar-9 .nav-links a::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #64ffda;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-9 .nav-links a:hover::before {
+            width: 100%;
+        }
+        
+        .navbar-9 .nav-links a span {
+            color: #64ffda;
+            margin-right: 5px;
+        }
+        
+        /* Navbar 10: Grunge Sticker */
+        .navbar-10 {
+            background-color: #f8f1e5;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px dashed #333;
+            position: relative;
+        }
+        
+        .navbar-10::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 1px solid #333;
+            pointer-events: none;
+        }
+        
+        .navbar-10 .logo {
+            color: #333;
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'Brush Script MT', cursive;
+        }
+        
+        .navbar-10 .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .navbar-10 .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            background: #f8f1e5;
+            border: 2px solid #333;
+            transform: rotate(-2deg);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .navbar-10 .nav-links a:nth-child(even) {
+            transform: rotate(2deg);
+        }
+        
+        .navbar-10 .nav-links a:hover {
+            background: #333;
+            color: #f8f1e5;
+            transform: rotate(0deg) scale(1.05);
+        }
+        
+        /* Navbar 11: Cyber Terminal */
+        .navbar-11 {
+            background-color: #000;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #0f0;
+            border-bottom: 1px solid #0f0;
+        }
+        
+        .navbar-11 .logo {
+            color: #0f0;
+            font-size: 18px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .navbar-11 .logo::before {
+            content: '> ';
+        }
+        
+        .navbar-11 .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .navbar-11 .nav-links a {
+            color: #0f0;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            position: relative;
+        }
+        
+        .navbar-11 .nav-links a::before {
+            content: '[';
+            position: absolute;
+            left: -8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .navbar-11 .nav-links a::after {
+            content: ']';
+            position: absolute;
+            right: -8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .navbar-11 .nav-links a:hover::before,
+        .navbar-11 .nav-links a:hover::after {
+            opacity: 1;
+        }
+        
+        /* Navbar 12: Neon Sign */
+        .navbar-12 {
+            background-color: #1a1a2e;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-12 .logo {
+            color: #e94560;
+            font-size: 28px;
+            font-weight: 700;
+            text-shadow: 0 0 10px #e94560, 0 0 20px #e94560;
+        }
+        
+        .navbar-12 .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .navbar-12 .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .navbar-12 .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: #0f3460;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-12 .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .navbar-12 .nav-links a:hover {
+            color: #e94560;
+            text-shadow: 0 0 5px #e94560;
+        }
+        
+        /* Navbar 13: Sci-Fi Panel */
+        .navbar-13 {
+            background-color: #0b0c10;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #45a29e;
+            box-shadow: inset 0 0 10px rgba(69, 162, 158, 0.3);
+        }
+        
+        .navbar-13 .logo {
+            color: #66fcf1;
+            font-size: 22px;
+            font-weight: 500;
+        }
+        
+        .navbar-13 .logo span {
+            color: #45a29e;
+        }
+        
+        .navbar-13 .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .navbar-13 .nav-links a {
+            color: #c5c6c7;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-13 .nav-links a:hover {
+            border: 1px solid #45a29e;
+            color: #66fcf1;
+        }
+        
+        /* Navbar 14: Street Art */
+        .navbar-14 {
+            background-color: #fffaed;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 5px solid #ff6b6b;
+            border-bottom: 5px solid #4ecdc4;
+        }
+        
+        .navbar-14 .logo {
+            color: #ff6b6b;
+            font-size: 28px;
+            font-weight: 900;
+            font-family: 'Arial Black', sans-serif;
+            text-transform: uppercase;
+        }
+        
+        .navbar-14 .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .navbar-14 .nav-links a {
+            color: #556270;
+            text-decoration: none;
+            font-weight: 700;
+            font-family: 'Verdana', sans-serif;
+            padding: 8px 0;
+            position: relative;
+        }
+        
+        .navbar-14 .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: #4ecdc4;
+            bottom: 0;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-14 .nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        /* Navbar 15: Luxury Gold */
+        .navbar-15 {
+            background-color: #1a1a1a;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-15 .logo {
+            color: #d4af37;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .navbar-15 .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+        
+        .navbar-15 .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .navbar-15 .nav-links a::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #d4af37;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-15 .nav-links a:hover::before {
+            width: 100%;
+        }
+        
+        /* Navbar 16: Pixel Art */
+        .navbar-16 {
+            background-color: #5b5f97;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 4px solid #000;
+        }
+        
+        .navbar-16 .logo {
+            color: #ffc145;
+            font-size: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 0 #000;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .navbar-16 .nav-links {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .navbar-16 .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            padding: 8px 12px;
+            background: #ff6b6b;
+            border: 2px solid #000;
+            box-shadow: 3px 3px 0 #000;
+            transition: all 0.2s ease;
+        }
+        
+        .navbar-16 .nav-links a:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0 #000;
+        }
+        
+        /* Navbar 17: Dark Fantasy */
+        .navbar-17 {
+            background-color: #2d2424;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #b85c38;
+        }
+        
+        .navbar-17 .logo {
+            color: #e0c097;
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .navbar-17 .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .navbar-17 .nav-links a {
+            color: #e0c097;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .navbar-17 .nav-links a::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #b85c38;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-17 .nav-links a:hover::before {
+            width: 100%;
+        }
+        
+        /* Navbar 18: Cyber Glitch */
+        .navbar-18 {
+            background-color: #0f0f1a;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #6a00f4;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .navbar-18::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(106, 0, 244, 0.1), transparent);
+            transition: 0.5s;
+        }
+        
+        .navbar-18:hover::before {
+            left: 100%;
+        }
+        
+        .navbar-18 .logo {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 700;
+        }
+        
+        .navbar-18 .logo span {
+            color: #6a00f4;
+        }
+        
+        .navbar-18 .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .navbar-18 .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .navbar-18 .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #6a00f4;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-18 .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Navbar 19: Minimal Black */
+        .navbar-19 {
+            background-color: #000;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-19 .logo {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        .navbar-19 .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .navbar-19 .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        
+        .navbar-19 .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            background: #fff;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-19 .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Navbar 20: Vaporwave */
+        .navbar-20 {
+            background: linear-gradient(90deg, #ff71ce, #01cdfe);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-20 .logo {
+            color: #fff;
+            font-size: 28px;
+            font-weight: 700;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .navbar-20 .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .navbar-20 .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-20 .nav-links a:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <h1>20 Unique and Badass Navbar Designs</h1>
+    
+    <section>
+        <h2>1. Cyberpunk Neon</h2>
+        <nav class="navbar-1">
+            <div class="logo">CYBERNAV</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Portfolio</a>
+                <a href="#">Contact</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>2. Brutalist Black & White</h2>
+        <nav class="navbar-2">
+            <div class="logo">BRUTAL</div>
+            <div class="nav-links">
+                <a href="#">WORK</a>
+                <a href="#">ABOUT</a>
+                <a href="#">BLOG</a>
+                <a href="#">CONTACT</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>3. Glossy Gradient</h2>
+        <nav class="navbar-3">
+            <div class="logo">GRADIENT</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Features</a>
+                <a href="#">Pricing</a>
+                <a href="#">About</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>4. Dark Tech</h2>
+        <nav class="navbar-4">
+            <div class="logo">root@<span>server</span>:#</div>
+            <div class="nav-links">
+                <a href="#">home</a>
+                <a href="#">projects</a>
+                <a href="#">contact</a>
+                <a href="#">login</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>5. Minimal White with Underline</h2>
+        <nav class="navbar-5">
+            <div class="logo">Minimal</div>
+            <div class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#">About</a>
+                <a href="#">Work</a>
+                <a href="#">Contact</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>6. Glass Morphism</h2>
+        <nav class="navbar-6">
+            <div class="logo">GlassUI</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Products</a>
+                <a href="#">Services</a>
+                <a href="#">Contact</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>7. Retro Gaming</h2>
+        <nav class="navbar-7">
+            <div class="logo">8-BIT</div>
+            <div class="nav-links">
+                <a href="#">START</a>
+                <a href="#">LOAD</a>
+                <a href="#">OPTIONS</a>
+                <a href="#">EXIT</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>8. Industrial Metal</h2>
+        <nav class="navbar-8">
+            <div class="logo">INDUSTRIAL<span>METAL</span></div>
+            <div class="nav-links">
+                <a href="#">HOME</a>
+                <a href="#">PRODUCTS</a>
+                <a href="#">SERVICES</a>
+                <a href="#">CONTACT</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>9. Futuristic Hologram</h2>
+        <nav class="navbar-9">
+            <div class="logo">HOLO_NAV</div>
+            <div class="nav-links">
+                <a href="#"><span>01.</span>Home</a>
+                <a href="#"><span>02.</span>About</a>
+                <a href="#"><span>03.</span>Work</a>
+                <a href="#"><span>04.</span>Contact</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>10. Grunge Sticker</h2>
+        <nav class="navbar-10">
+            <div class="logo">GrungeCo</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Work</a>
+                <a href="#">Contact</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>11. Cyber Terminal</h2>
+        <nav class="navbar-11">
+            <div class="logo">system_nav.exe</div>
+            <div class="nav-links">
+                <a href="#">home</a>
+                <a href="#">files</a>
+                <a href="#">system</a>
+                <a href="#">exit</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>12. Neon Sign</h2>
+        <nav class="navbar-12">
+            <div class="logo">NEON</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Gallery</a>
+                <a href="#">Contact</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>13. Sci-Fi Panel</h2>
+        <nav class="navbar-13">
+            <div class="logo">SCI-FI<span>NAV</span></div>
+            <div class="nav-links">
+                <a href="#">Dashboard</a>
+                <a href="#">Systems</a>
+                <a href="#">Controls</a>
+                <a href="#">Logout</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>14. Street Art</h2>
+        <nav class="navbar-14">
+            <div class="logo">STREET</div>
+            <div class="nav-links">
+                <a href="#">HOME</a>
+                <a href="#">ABOUT</a>
+                <a href="#">GALLERY</a>
+                <a href="#">CONTACT</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>15. Luxury Gold</h2>
+        <nav class="navbar-15">
+            <div class="logo">LUXURY</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Contact</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>16. Pixel Art</h2>
+        <nav class="navbar-16">
+            <div class="logo">PIXEL</div>
+            <div class="nav-links">
+                <a href="#">START</a>
+                <a href="#">OPTIONS</a>
+                <a href="#">CREDITS</a>
+                <a href="#">EXIT</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>17. Dark Fantasy</h2>
+        <nav class="navbar-17">
+            <div class="logo">DarkKeep</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Lore</a>
+                <a href="#">Characters</a>
+                <a href="#">Contact</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>18. Cyber Glitch</h2>
+        <nav class="navbar-18">
+            <div class="logo">GLITCH<span>_NAV</span></div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Work</a>
+                <a href="#">Contact</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>19. Minimal Black</h2>
+        <nav class="navbar-19">
+            <div class="logo">MINIMAL</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Work</a>
+                <a href="#">Contact</a>
+            </div>
+        </nav>
+    </section>
+    
+    <section>
+        <h2>20. Vaporwave</h2>
+        <nav class="navbar-20">
+            <div class="logo">ＡＥＳＴＨＥＴＩＣ</div>
+            <div class="nav-links">
+                <a href="#">ＨＯＭＥ</a>
+                <a href="#">ＡＢＯＵＴ</a>
+                <a href="#">ＣＯＮＴＡＣＴ</a>
+            </div>
+        </nav>
+    </section>
+</body>
+</html>
