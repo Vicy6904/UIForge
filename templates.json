@@ -220,6 +220,33 @@
         ]
     },
     {
+        "id": "components-buttons-02",
+        "title": "NeonMotion UI Button Pack",
+        "description": "A premium collection of 20 unique, animated button designs featuring hover effects, click animations, and modern styles. Includes neon glows, liquid fills, 3D presses, cyberpunk styles, particle effects, and glass morphism designs. Perfect for landing pages, dashboards, and interactive web applications.",
+        "category": "components",
+        "thumbnail": "templates/Preview/components/buttons/2.png",
+        "previewUrl": "templates/Preview/components/buttons/2.html",
+        "downloadUrl": "templates/Download/components/buttons.zip",
+        "tags": [
+            "Buttons",
+            "Hover Effects",
+            "CSS Animations",
+            "Interactive",
+            "Modern UI",
+            "Neon",
+            "Glass Morphism",
+            "3D Effects"
+        ],
+        "tech": [
+            "HTML5",
+            "CSS3",
+            "JavaScript",
+            "CSS Animations",
+            "Clip-Path",
+            "Custom Properties"
+        ]
+    },
+    {
         "id": "components-navbar-01",
         "title": "NavMotions UI Navbar Pack",
         "description": "A curated pack of 20 modern, animated navigation bars including top navs, sidebars, hamburger menus, dropdowns, and responsive transitions. Perfect for dashboards, websites, and mobile UIs.",
