@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20 Unique Button Designs</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        h1 {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .btn-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .btn-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #444;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        
+        /* 1. Neon Glow */
+        .btn-1 {
+            background: #000;
+            color: #0ff;
+            padding: 12px 24px;
+            border: 2px solid #0ff;
+            border-radius: 0;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px #0ff, inset 0 0 10px #0ff;
+            transition: all 0.3s ease;
+        }
+        .btn-1:hover {
+            box-shadow: 0 0 20px #0ff, inset 0 0 20px #0ff;
+            text-shadow: 0 0 10px #0ff;
+        }
+        
+        /* 2. Liquid Fill */
+        .btn-2 {
+            background: transparent;
+            color: #ff6b6b;
+            padding: 12px 24px;
+            border: 2px solid #ff6b6b;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.3s ease;
+        }
+        .btn-2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ff6b6b;
+            z-index: -1;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        .btn-2:hover {
+            color: white;
+        }
+        .btn-2:hover::before {
+            transform: translateY(0);
+        }
+        
+        /* 3. 3D Press */
+        .btn-3 {
+            background: #4a6bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 5px 0 #3a56d4, 0 8px 10px rgba(0,0,0,0.2);
+            transition: all 0.1s ease;
+        }
+        .btn-3:active {
+            transform: translateY(5px);
+            box-shadow: 0 0 0 #3a56d4, 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* 4. Border Draw */
+        .btn-4 {
+            background: transparent;
+            color: #333;
+            padding: 12px 24px;
+            position: relative;
+            border: none;
+        }
+        .btn-4::before, .btn-4::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #ff4757;
+            transition: all 0.3s ease;
+        }
+        .btn-4::before {
+            top: 0;
+            left: 0;
+        }
+        .btn-4::after {
+            bottom: 0;
+            right: 0;
+        }
+        .btn-4:hover::before, .btn-4:hover::after {
+            width: 100%;
+        }
+        
+        /* 5. Gradient Shift */
+        .btn-5 {
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 100%);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            background-size: 200% auto;
+            transition: all 0.3s ease;
+        }
+        .btn-5:hover {
+            background-position: right center;
+            transform: scale(1.05);
+        }
+        
+        /* 6. Split Hover */
+        .btn-6 {
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn-6::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: #ff4757;
+            z-index: -1;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .btn-6::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: #3742fa;
+            z-index: -1;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .btn-6:hover::before, .btn-6:hover::after {
+            transform: translateX(0);
+        }
+        
+        /* 7. Cyberpunk */
+        .btn-7 {
+            background: #ff0090;
+            color: black;
+            padding: 12px 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            clip-path: polygon(
+                0 0,
+                100% 0,
+                100% calc(100% - 10px),
+                calc(100% - 10px) 100%,
+                0 100%
+            );
+            transition: all 0.3s ease;
+        }
+        .btn-7:hover {
+            clip-path: polygon(
+                10px 0,
+                100% 0,
+                100% calc(100% - 10px),
+                calc(100% - 10px) 100%,
+                0 100%,
+                0 10px
+            );
+        }
+        
+        /* 8. Particle Burst */
+        .btn-8 {
+            background: #1a0033;
+            color: #cc00ff;
+            padding: 12px 24px;
+            border-radius: 4px;
+            position: relative;
+            overflow: visible;
+        }
+        .btn-8::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: #cc00ff;
+            border-radius: 50%;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(1);
+            box-shadow: 
+                0 0 10px 2px #cc00ff,
+                20px -10px 0 0 #cc00ff,
+                -20px 10px 0 0 #cc00ff,
+                15px 15px 0 0 #cc00ff,
+                -15px -15px 0 0 #cc00ff;
+            transition: all 0.5s ease;
+        }
+        .btn-8:hover::after {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(5);
+        }
+        
+        /* 9. Glass Morphism */
+        .btn-9 {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .btn-9:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 10. Retro CRT */
+        .btn-10 {
+            background: #000;
+            color: #0f0;
+            padding: 12px 24px;
+            border: 2px solid #0f0;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-10::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.4), transparent);
+            transition: 0.5s;
+        }
+        .btn-10:hover::before {
+            left: 100%;
+        }
+        
+        /* 11. Magnetic Pull */
+        .btn-11 {
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            border: none;
+            box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .btn-11:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(255, 107, 107, 0.4);
+        }
+        
+        /* 12. Pixel Art */
+        .btn-12 {
+            background: #ff9f43;
+            color: #2f3542;
+            padding: 12px 24px;
+            border: none;
+            position: relative;
+            font-family: 'Press Start 2P', cursive;
+            box-shadow: 
+                4px 0 0 0 #2f3542,
+                0 4px 0 0 #2f3542,
+                4px 4px 0 0 #2f3542,
+                4px 0 0 0 #2f3542 inset,
+                0 4px 0 0 #2f3542 inset;
+            transition: all 0.1s ease;
+        }
+        .btn-12:active {
+            box-shadow: 
+                2px 0 0 0 #2f3542,
+                0 2px 0 0 #2f3542,
+                2px 2px 0 0 #2f3542,
+                2px 0 0 0 #2f3542 inset,
+                0 2px 0 0 #2f3542 inset;
+            transform: translate(2px, 2px);
+        }
+        
+        /* 13. Holographic */
+        .btn-13 {
+            background: linear-gradient(90deg, #ff00cc, #3333ff, #00ccff);
+            background-size: 200% auto;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            animation: holographic 3s linear infinite;
+            transition: all 0.3s ease;
+        }
+        @keyframes holographic {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+        .btn-13:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 204, 255, 0.6);
+        }
+        
+        /* 14. Depth Layers */
+        .btn-14 {
+            background: #6c5ce7;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .btn-14::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: -5px;
+            bottom: -5px;
+            background: rgba(108, 92, 231, 0.5);
+            border-radius: 8px;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+        .btn-14:hover {
+            transform: translate(3px, 3px);
+        }
+        .btn-14:hover::before {
+            transform: translate(-3px, -3px);
+        }
+        
+        /* 15. Liquid Metal */
+        .btn-15 {
+            background: linear-gradient(145deg, #e0e0e0, #ffffff);
+            color: #333;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 
+                5px 5px 10px #bebebe,
+                -5px -5px 10px #ffffff;
+            transition: all 0.3s ease;
+        }
+        .btn-15:active {
+            box-shadow: 
+                inset 5px 5px 10px #bebebe,
+                inset -5px -5px 10px #ffffff;
+        }
+        
+        /* 16. Infinite Rotation */
+        .btn-16 {
+            background: #00b894;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-16::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                transparent,
+                rgba(255,255,255,0.3),
+                transparent
+            );
+            transform: rotate(0deg);
+            transition: transform 0.6s ease;
+        }
+        .btn-16:hover::before {
+            transform: rotate(360deg);
+        }
+        
+        /* 17. Binary Code */
+        .btn-17 {
+            background: #000;
+            color: #0f0;
+            padding: 12px 24px;
+            border: 1px solid #0f0;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-17::before {
+            content: '010101010101010101010101010101010101010101010101';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: rgba(0, 255, 0, 0.1);
+            white-space: nowrap;
+            line-height: 1;
+            animation: binaryScroll 10s linear infinite;
+        }
+        @keyframes binaryScroll {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* 18. Gravity Flip */
+        .btn-18 {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            perspective: 1000px;
+            transition: all 0.5s ease;
+        }
+        .btn-18:hover {
+            transform: rotateX(360deg);
+            background: #0984e3;
+        }
+        
+        /* 19. Smoke Effect */
+        .btn-19 {
+            background: #2d3436;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-19::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            opacity: 0;
+            box-shadow: 
+                0 0 10px 10px rgba(255,255,255,0.5),
+                0 0 20px 20px rgba(255,255,255,0.3);
+            transition: all 0.6s ease;
+        }
+        .btn-19:hover::before {
+            opacity: 1;
+            transform: scale(5);
+        }
+        
+        /* 20. Gravity Well */
+        .btn-20 {
+            background: #6c5ce7;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-20::before {
+            content: '';
+            position: absolute;
+            top: var(--y);
+            left: var(--x);
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle closest-side, rgba(255,255,255,0.3), transparent);
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+        .btn-20:hover::before {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>20 Unique Button Designs</h1>
+    
+    <!-- Button 1 -->
+    <div class="btn-container">
+        <div class="btn-title">1. Neon Glow</div>
+        <button class="btn-1">Hover Me</button>
+        <pre><code>/* 1. Neon Glow */
+.btn-1 {
+    background: #000;
+    color: #0ff;
+    padding: 12px 24px;
+    border: 2px solid #0ff;
+    border-radius: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px #0ff, inset 0 0 10px #0ff;
+    transition: all 0.3s ease;
+}
+.btn-1:hover {
+    box-shadow: 0 0 20px #0ff, inset 0 0 20px #0ff;
+    text-shadow: 0 0 10px #0ff;
+}</code></pre>
+    </div>
+    
+    <!-- Button 2 -->
+    <div class="btn-container">
+        <div class="btn-title">2. Liquid Fill</div>
+        <button class="btn-2">Hover Me</button>
+        <pre><code>/* 2. Liquid Fill */
+.btn-2 {
+    background: transparent;
+    color: #ff6b6b;
+    padding: 12px 24px;
+    border: 2px solid #ff6b6b;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+.btn-2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ff6b6b;
+    z-index: -1;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+.btn-2:hover {
+    color: white;
+}
+.btn-2:hover::before {
+    transform: translateY(0);
+}</code></pre>
+    </div>
+    
+    <!-- Button 3 -->
+    <div class="btn-container">
+        <div class="btn-title">3. 3D Press</div>
+        <button class="btn-3">Press Me</button>
+        <pre><code>/* 3. 3D Press */
+.btn-3 {
+    background: #4a6bff;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 5px 0 #3a56d4, 0 8px 10px rgba(0,0,0,0.2);
+    transition: all 0.1s ease;
+}
+.btn-3:active {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 #3a56d4, 0 2px 5px rgba(0,0,0,0.2);
+}</code></pre>
+    </div>
+    
+    <!-- Button 4 -->
+    <div class="btn-container">
+        <div class="btn-title">4. Border Draw</div>
+        <button class="btn-4">Hover Me</button>
+        <pre><code>/* 4. Border Draw */
+.btn-4 {
+    background: transparent;
+    color: #333;
+    padding: 12px 24px;
+    position: relative;
+    border: none;
+}
+.btn-4::before, .btn-4::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #ff4757;
+    transition: all 0.3s ease;
+}
+.btn-4::before {
+    top: 0;
+    left: 0;
+}
+.btn-4::after {
+    bottom: 0;
+    right: 0;
+}
+.btn-4:hover::before, .btn-4:hover::after {
+    width: 100%;
+}</code></pre>
+    </div>
+    
+    <!-- Button 5 -->
+    <div class="btn-container">
+        <div class="btn-title">5. Gradient Shift</div>
+        <button class="btn-5">Hover Me</button>
+        <pre><code>/* 5. Gradient Shift */
+.btn-5 {
+    background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 100%);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    background-size: 200% auto;
+    transition: all 0.3s ease;
+}
+.btn-5:hover {
+    background-position: right center;
+    transform: scale(1.05);
+}</code></pre>
+    </div>
+    
+    <!-- Button 6 -->
+    <div class="btn-container">
+        <div class="btn-title">6. Split Hover</div>
+        <button class="btn-6">Hover Me</button>
+        <pre><code>/* 6. Split Hover */
+.btn-6 {
+    background: #333;
+    color: white;
+    padding: 12px 24px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+.btn-6::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: #ff4757;
+    z-index: -1;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+.btn-6::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: #3742fa;
+    z-index: -1;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+.btn-6:hover::before, .btn-6:hover::after {
+    transform: translateX(0);
+}</code></pre>
+    </div>
+    
+    <!-- Button 7 -->
+    <div class="btn-container">
+        <div class="btn-title">7. Cyberpunk</div>
+        <button class="btn-7">HACK</button>
+        <pre><code>/* 7. Cyberpunk */
+.btn-7 {
+    background: #ff0090;
+    color: black;
+    padding: 12px 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - 10px),
+        calc(100% - 10px) 100%,
+        0 100%
+    );
+    transition: all 0.3s ease;
+}
+.btn-7:hover {
+    clip-path: polygon(
+        10px 0,
+        100% 0,
+        100% calc(100% - 10px),
+        calc(100% - 10px) 100%,
+        0 100%,
+        0 10px
+    );
+}</code></pre>
+    </div>
+    
+    <!-- Button 8 -->
+    <div class="btn-container">
+        <div class="btn-title">8. Particle Burst</div>
+        <button class="btn-8">Hover Me</button>
+        <pre><code>/* 8. Particle Burst */
+.btn-8 {
+    background: #1a0033;
+    color: #cc00ff;
+    padding: 12px 24px;
+    border-radius: 4px;
+    position: relative;
+    overflow: visible;
+}
+.btn-8::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: #cc00ff;
+    border-radius: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 
+        0 0 10px 2px #cc00ff,
+        20px -10px 0 0 #cc00ff,
+        -20px 10px 0 0 #cc00ff,
+        15px 15px 0 0 #cc00ff,
+        -15px -15px 0 0 #cc00ff;
+    transition: all 0.5s ease;
+}
+.btn-8:hover::after {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(5);
+}</code></pre>
+    </div>
+    
+    <!-- Button 9 -->
+    <div class="btn-container">
+        <div class="btn-title">9. Glass Morphism</div>
+        <button class="btn-9">Hover Me</button>
+        <pre><code>/* 9. Glass Morphism */
+.btn-9 {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+.btn-9:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}</code></pre>
+    </div>
+    
+    <!-- Button 10 -->
+    <div class="btn-container">
+        <div class="btn-title">10. Retro CRT</div>
+        <button class="btn-10">RUN PROGRAM</button>
+        <pre><code>/* 10. Retro CRT */
+.btn-10 {
+    background: #000;
+    color: #0f0;
+    padding: 12px 24px;
+    border: 2px solid #0f0;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+}
+.btn-10::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.4), transparent);
+    transition: 0.5s;
+}
+.btn-10:hover::before {
+    left: 100%;
+}</code></pre>
+    </div>
+    
+    <!-- Button 11 -->
+    <div class="btn-container">
+        <div class="btn-title">11. Magnetic Pull</div>
+        <button class="btn-11">Hover Me</button>
+        <pre><code>/* 11. Magnetic Pull */
+.btn-11 {
+    background: #ff6b6b;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.btn-11:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(255, 107, 107, 0.4);
+}</code></pre>
+    </div>
+    
+    <!-- Button 12 -->
+    <div class="btn-container">
+        <div class="btn-title">12. Pixel Art</div>
+        <button class="btn-12">CLICK ME</button>
+        <pre><code>/* 12. Pixel Art */
+.btn-12 {
+    background: #ff9f43;
+    color: #2f3542;
+    padding: 12px 24px;
+    border: none;
+    position: relative;
+    font-family: 'Press Start 2P', cursive;
+    box-shadow: 
+        4px 0 0 0 #2f3542,
+        0 4px 0 0 #2f3542,
+        4px 4px 0 0 #2f3542,
+        4px 0 0 0 #2f3542 inset,
+        0 4px 0 0 #2f3542 inset;
+    transition: all 0.1s ease;
+}
+.btn-12:active {
+    box-shadow: 
+        2px 0 0 0 #2f3542,
+        0 2px 0 0 #2f3542,
+        2px 2px 0 0 #2f3542,
+        2px 0 0 0 #2f3542 inset,
+        0 2px 0 0 #2f3542 inset;
+    transform: translate(2px, 2px);
+}</code></pre>
+    </div>
+    
+    <!-- Button 13 -->
+    <div class="btn-container">
+        <div class="btn-title">13. Holographic</div>
+        <button class="btn-13">Hover Me</button>
+        <pre><code>/* 13. Holographic */
+.btn-13 {
+    background: linear-gradient(90deg, #ff00cc, #3333ff, #00ccff);
+    background-size: 200% auto;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    animation: holographic 3s linear infinite;
+    transition: all 0.3s ease;
+}
+@keyframes holographic {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+.btn-13:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 204, 255, 0.6);
+}</code></pre>
+    </div>
+    
+    <!-- Button 14 -->
+    <div class="btn-container">
+        <div class="btn-title">14. Depth Layers</div>
+        <button class="btn-14">Hover Me</button>
+        <pre><code>/* 14. Depth Layers */
+.btn-14 {
+    background: #6c5ce7;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+.btn-14::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: -5px;
+    bottom: -5px;
+    background: rgba(108, 92, 231, 0.5);
+    border-radius: 8px;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+.btn-14:hover {
+    transform: translate(3px, 3px);
+}
+.btn-14:hover::before {
+    transform: translate(-3px, -3px);
+}</code></pre>
+    </div>
+    
+    <!-- Button 15 -->
+    <div class="btn-container">
+        <div class="btn-title">15. Liquid Metal</div>
+        <button class="btn-15">Press Me</button>
+        <pre><code>/* 15. Liquid Metal */
+.btn-15 {
+    background: linear-gradient(145deg, #e0e0e0, #ffffff);
+    color: #333;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 
+        5px 5px 10px #bebebe,
+        -5px -5px 10px #ffffff;
+    transition: all 0.3s ease;
+}
+.btn-15:active {
+    box-shadow: 
+        inset 5px 5px 10px #bebebe,
+        inset -5px -5px 10px #ffffff;
+}</code></pre>
+    </div>
+    
+    <!-- Button 16 -->
+    <div class="btn-container">
+        <div class="btn-title">16. Infinite Rotation</div>
+        <button class="btn-16">Hover Me</button>
+        <pre><code>/* 16. Infinite Rotation */
+.btn-16 {
+    background: #00b894;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+}
+.btn-16::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        transparent,
+        rgba(255,255,255,0.3),
+        transparent
+    );
+    transform: rotate(0deg);
+    transition: transform 0.6s ease;
+}
+.btn-16:hover::before {
+    transform: rotate(360deg);
+}</code></pre>
+    </div>
+    
+    <!-- Button 17 -->
+    <div class="btn-container">
+        <div class="btn-title">17. Binary Code</div>
+        <button class="btn-17">Hover Me</button>
+        <pre><code>/* 17. Binary Code */
+.btn-17 {
+    background: #000;
+    color: #0f0;
+    padding: 12px 24px;
+    border: 1px solid #0f0;
+    font-family: 'Courier New', monospace;
+    position: relative;
+    overflow: hidden;
+}
+.btn-17::before {
+    content: '010101010101010101010101010101010101010101010101';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: rgba(0, 255, 0, 0.1);
+    white-space: nowrap;
+    line-height: 1;
+    animation: binaryScroll 10s linear infinite;
+}
+@keyframes binaryScroll {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}</code></pre>
+    </div>
+    
+    <!-- Button 18 -->
+    <div class="btn-container">
+        <div class="btn-title">18. Gravity Flip</div>
+        <button class="btn-18">Hover Me</button>
+        <pre><code>/* 18. Gravity Flip */
+.btn-18 {
+    background: #2d3436;
+    color: #dfe6e9;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    perspective: 1000px;
+    transition: all 0.5s ease;
+}
+.btn-18:hover {
+    transform: rotateX(360deg);
+    background: #0984e3;
+}</code></pre>
+    </div>
+    
+    <!-- Button 19 -->
+    <div class="btn-container">
+        <div class="btn-title">19. Smoke Effect</div>
+        <button class="btn-19">Hover Me</button>
+        <pre><code>/* 19. Smoke Effect */
+.btn-19 {
+    background: #2d3436;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+.btn-19::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 
+        0 0 10px 10px rgba(255,255,255,0.5),
+        0 0 20px 20px rgba(255,255,255,0.3);
+    transition: all 0.6s ease;
+}
+.btn-19:hover::before {
+    opacity: 1;
+    transform: scale(5);
+}</code></pre>
+    </div>
+    
+    <!-- Button 20 -->
+    <div class="btn-container">
+        <div class="btn-title">20. Gravity Well</div>
+        <button class="btn-20">Hover Me</button>
+        <pre><code>/* 20. Gravity Well */
+.btn-20 {
+    background: #6c5ce7;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+.btn-20::before {
+    content: '';
+    position: absolute;
+    top: var(--y);
+    left: var(--x);
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle closest-side, rgba(255,255,255,0.3), transparent);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+.btn-20:hover::before {
+    width: 200px;
+    height: 200px;
+}</code></pre>
+    </div>
+
+    <script>
+        // Add mouse position tracking for Button 20
+        document.querySelectorAll('.btn-20').forEach(button => {
+            button.addEventListener('mousemove', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                button.style.setProperty('--x', `${x}px`);
+                button.style.setProperty('--y', `${y}px`);
+            });
+        });
+        
+        // Add copy functionality for all code blocks
+        document.querySelectorAll('pre code').forEach(codeBlock => {
+            codeBlock.addEventListener('click', () => {
+                const range = document.createRange();
+                range.selectNode(codeBlock);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+                
+                // Show copied notification
+                const notification = document.createElement('div');
+                notification.textContent = 'Copied!';
+                notification.style.position = 'fixed';
+                notification.style.bottom = '20px';
+                notification.style.right = '20px';
+                notification.style.backgroundColor = '#4CAF50';
+                notification.style.color = 'white';
+                notification.style.padding = '10px 20px';
+                notification.style.borderRadius = '5px';
+                notification.style.zIndex = '1000';
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

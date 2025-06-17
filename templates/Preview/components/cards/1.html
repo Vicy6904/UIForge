@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20 Badass Animated Cards</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #111;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .card-container {
+            perspective: 1000px;
+            width: 250px;
+            height: 350px;
+            margin: 15px;
+        }
+        
+        .card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .card:hover {
+            transform: rotateY(10deg) rotateX(5deg);
+        }
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: white;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .card-front {
+            transform: rotateY(0deg);
+            z-index: 2;
+        }
+        
+        .card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, #222, #000);
+            display: none; /* Only showing front for this demo */
+        }
+        
+        .card-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+            text-align: center;
+            z-index: 3;
+        }
+        
+        .card-desc {
+            font-size: 14px;
+            text-align: center;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            z-index: 3;
+        }
+        
+        /* Card 1: Inferno Blade */
+        .card-1 .card-front {
+            background: linear-gradient(45deg, #8B0000, #FF4500);
+        }
+        
+        .card-1::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M30,50 L70,50" stroke="orange" stroke-width="2" stroke-dasharray="5,3"/></svg>');
+            background-size: 100% 100%;
+            z-index: 1;
+            animation: swordSlash 2s infinite;
+        }
+        
+        @keyframes swordSlash {
+            0% { transform: translateX(-100%) rotate(-30deg); opacity: 0; }
+            50% { transform: translateX(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateX(100%) rotate(30deg); opacity: 0; }
+        }
+        
+        .card-1::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255,100,0,0.3) 0%, transparent 70%);
+            animation: firePulse 1.5s infinite alternate;
+        }
+        
+        @keyframes firePulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+        
+        /* Card 2: Neon Reaper */
+        .card-2 .card-front {
+            background: linear-gradient(45deg, #0f0c29, #302b63);
+        }
+        
+        .card-2 .card-title {
+            color: #00f7ff;
+            text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
+        }
+        
+        .card-2::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="40" r="15" fill="none" stroke="%2300f7ff" stroke-width="1"/></svg>');
+            background-size: 100% 100%;
+            z-index: 1;
+            animation: neonPulse 2s infinite alternate;
+        }
+        
+        @keyframes neonPulse {
+            0% { opacity: 0.3; transform: scale(0.9); }
+            100% { opacity: 0.8; transform: scale(1.1); }
+        }
+        
+        .card-2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30%;
+            background: linear-gradient(to top, rgba(0,247,255,0.3), transparent);
+            animation: neonRise 3s infinite;
+        }
+        
+        @keyframes neonRise {
+            0% { height: 30%; opacity: 0; }
+            50% { height: 60%; opacity: 0.5; }
+            100% { height: 30%; opacity: 0; }
+        }
+        
+        /* Card 3: Thunder Warlord */
+        .card-3 .card-front {
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f);
+        }
+        
+        .card-3 .card-title {
+            color: #f0f0f0;
+            text-shadow: 0 0 5px #fff, 0 0 10px #fff;
+        }
+        
+        .card-3::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,10 60,40 90,40 65,60 75,90 50,70 25,90 35,60 10,40 40,40" fill="yellow" opacity="0.7"/></svg>');
+            background-size: 20% 20%;
+            z-index: 1;
+            animation: lightning 0.5s infinite alternate, lightningMove 3s infinite;
+        }
+        
+        @keyframes lightning {
+            0% { opacity: 0; }
+            100% { opacity: 0.7; }
+        }
+        
+        @keyframes lightningMove {
+            0% { background-position: 10% 10%; }
+            25% { background-position: 90% 30%; }
+            50% { background-position: 50% 70%; }
+            75% { background-position: 20% 90%; }
+            100% { background-position: 80% 20%; }
+        }
+        
+        /* Card 4: Void Phantom */
+        .card-4 .card-front {
+            background: linear-gradient(45deg, #000000, #434343);
+        }
+        
+        .card-4 .card-title {
+            color: #8a2be2;
+            text-shadow: 0 0 5px #8a2be2;
+        }
+        
+        .card-4::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #8a2be2, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            animation: voidPulse 3s infinite;
+        }
+        
+        @keyframes voidPulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.3; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+        }
+        
+        .card-4::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%238a2be2" stroke-width="1" stroke-dasharray="5,3"/></svg>');
+            background-size: 100% 100%;
+            z-index: 1;
+            animation: voidSpin 10s infinite linear;
+        }
+        
+        @keyframes voidSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Card 5: Blood Moon Assassin */
+        .card-5 .card-front {
+            background: linear-gradient(45deg, #23074d, #cc5333);
+        }
+        
+        .card-5 .card-title {
+            color: #ff2400;
+            text-shadow: 0 0 5px #ff2400;
+        }
+        
+        .card-5::before {
+            content: "";
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #ff2400, transparent 70%);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            animation: bloodPulse 3s infinite;
+        }
+        
+        @keyframes bloodPulse {
+            0% { transform: translateX(-50%) scale(1); opacity: 0.7; }
+            50% { transform: translateX(-50%) scale(1.2); opacity: 0.9; }
+            100% { transform: translateX(-50%) scale(1); opacity: 0.7; }
+        }
+        
+        .card-5::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(to right, transparent, #ff2400, transparent);
+            animation: bloodDrip 4s infinite;
+        }
+        
+        @keyframes bloodDrip {
+            0% { height: 10px; opacity: 0; }
+            50% { height: 20px; opacity: 0.7; }
+            100% { height: 10px; opacity: 0; }
+        }
+        
+        /* Card 6: Dragon Overlord */
+        .card-6 .card-front {
+            background: linear-gradient(45deg, #3a1c71, #d76d77);
+        }
+        
+        .card-6 .card-title {
+            color: #ff9a00;
+            text-shadow: 0 0 5px #ff9a00, 0 0 10px #ff9a00;
+        }
+        
+        .card-6::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%23ff9a00" stroke-width="2"/><circle cx="50" cy="50" r="30" fill="none" stroke="%23ff9a00" stroke-width="1"/><circle cx="50" cy="50" r="20" fill="none" stroke="%23ff9a00" stroke-width="0.5"/></svg>');
+            background-size: 100% 100%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            animation: dragonEye 4s infinite;
+        }
+        
+        @keyframes dragonEye {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        .card-6::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="%23ff9a00" stroke-width="1" stroke-dasharray="5,3"/></svg>');
+            background-size: 100% 100%;
+            z-index: 1;
+            animation: dragonScale 10s infinite linear;
+        }
+        
+        @keyframes dragonScale {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Card 7: Cybernetic Samurai */
+        .card-7 .card-front {
+            background: linear-gradient(45deg, #0f2027, #203a43);
+        }
+        
+        .card-7 .card-title {
+            color: #00ff9d;
+            text-shadow: 0 0 5px #00ff9d;
+        }
+        
+        .card-7::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="10" y="10" width="80" height="5" fill="%2300ff9d" opacity="0.5"/><rect x="10" y="25" width="80" height="3" fill="%2300ff9d" opacity="0.3"/><rect x="10" y="35" width="80" height="1" fill="%2300ff9d" opacity="0.2"/></svg>');
+            background-size: 100% 100%;
+            z-index: 1;
+            animation: cyberScan 3s infinite linear;
+        }
+        
+        @keyframes cyberScan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        
+        /* Card 8: Abyssal Leviathan */
+        .card-8 .card-front {
+            background: linear-gradient(45deg, #000428, #004e92);
+        }
+        
+        .card-8 .card-title {
+            color: #00d4ff;
+            text-shadow: 0 0 5px #00d4ff;
+        }
+        
+        .card-8::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10,50 Q25,30 40,50 Q55,70 70,50 Q85,30 90,50" fill="none" stroke="%2300d4ff" stroke-width="1"/></svg>');
+            background-size: 100% 100%;
+            z-index: 1;
+            animation: leviathanMove 5s infinite linear;
+        }
+        
+        @keyframes leviathanMove {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Card 9: Phoenix Emperor */
+        .card-9 .card-front {
+            background: linear-gradient(45deg, #f12711, #f5af19);
+        }
+        
+        .card-9 .card-title {
+            color: #fffb00;
+            text-shadow: 0 0 5px #fffb00;
+        }
+        
+        .card-9::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,10 L60,40 L90,40 L65,60 L75,90 L50,70 L25,90 L35,60 L10,40 L40,40 Z" fill="%23fffb00" opacity="0.5"/></svg>');
+            background-size: 100% 100%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            animation: phoenixRise 3s infinite;
+        }
+        
+        @keyframes phoenixRise {
+            0% { transform: translate(-50%, -50%) scale(0.8) rotate(0deg); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.2) rotate(10deg); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(0.8) rotate(0deg); opacity: 0.5; }
+        }
+        
+        /* Card 10: Doombringer */
+        .card-10 .card-front {
+            background: linear-gradient(45deg, #8E0E00, #1F1C18);
+        }
+        
+        .card-10 .card-title {
+            color: #ff0000;
+            text-shadow: 0 0 5px #ff0000;
+        }
+        
+        .card-10::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%23ff0000" stroke-width="2"/><path d="M30,30 L70,70 M70,30 L30,70" stroke="%23ff0000" stroke-width="2"/></svg>');
+            background-size: 100% 100%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            animation: doomPulse 2s infinite;
+        }
+        
+        @keyframes doomPulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.9; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+        }
+        
+        /* Card 11: Steel Titan */
+        .card-11 .card-front {
+            background: linear-gradient(45deg, #2c3e50, #bdc3c7);
+        }
+        
+        .card-11 .card-title {
+            color: #ffffff;
+            text-shadow: 0 0 5px #ffffff;
+        }
+        
+        .card-11::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" fill="none" stroke="%23ffffff" stroke-width="1" stroke-dasharray="5,3"/></svg>');
+            background-size: 100% 100%;
+            z-index: 1;
+            animation: titanGrid 10s infinite linear;
+        }
+        
+        @keyframes titanGrid {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Card 12: Spectre Gunslinger */
+        .card-12 .card-front {
+            background: linear-gradient(45deg, #1e130c, #9a8478);
+        }
+        
+        .card-12 .card-title {
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff;
+        }
+        
+        .card-12::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 40px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="10" y="45" width="80" height="10" fill="%2300ffff" opacity="0.5"/><circle cx="90" cy="50" r="8" fill="%2300ffff" opacity="0.5"/></svg>');
+            background-size: 100% 100%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            animation: gunShoot 3s infinite;
+        }
+        
+        @keyframes gunShoot {
+            0% { transform: translate(-50%, -50%) rotate(0deg); opacity: 0.5; }
+            25% { transform: translate(-50%, -50%) rotate(-5deg); opacity: 0.7; }
+            50% { transform: translate(-50%, -50%) rotate(0deg); opacity: 0.5; }
+            75% { transform: translate(-50%, -50%) rotate(5deg); opacity: 0.7; }
+            100% { transform: translate(-50%, -50%) rotate(0deg); opacity: 0.5; }
+        }
+        
+        /* Card 13: Celestial Harbinger */
+        .card-13 .card-front {
+            background: linear-gradient(45deg, #0f0c29, #302b63);
+        }
+        
+        .card-13 .card-title {
+            color: #e2e2e2;
+            text-shadow: 0 0 5px #e2e2e2;
+        }
+        
+        .card-13::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="5" fill="%23ffffff"/></svg>');
+            background-size: 5% 5%;
+            z-index: 1;
+            animation: starsTwinkle 5s infinite;
+        }
+        
+        @keyframes starsTwinkle {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.3; }
+        }
+        
+        /* Card 14: Plague Doctor */
+        .card-14 .card-front {
+            background: linear-gradient(45deg, #1a3a1a, #4a766e);
+        }
+        
+        .card-14 .card-title {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+        }
+        
+        .card-14::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,20 Q60,40 50,60 Q40,40 50,20 Z" fill="none" stroke="%2300ff00" stroke-width="2"/><circle cx="50" cy="40" r="10" fill="none" stroke="%2300ff00" stroke-width="1"/></svg>');
+            background-size: 100% 100%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            animation: plaguePulse 3s infinite;
+        }
+        
+        @keyframes plaguePulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+        }
+        
+        /* Card 15: Rune Berserker */
+        .card-15 .card-front {
+            background: linear-gradient(45deg, #4b1248, #f0c27b);
+        }
+        
+        .card-15 .card-title {
+            color: #ff8c00;
+            text-shadow: 0 0 5px #ff8c00;
+        }
+        
+        .card-15::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="%23ff8c00" stroke-width="1" stroke-dasharray="5,3"/></svg>');
+            background-size: 100% 100%;
+            z-index: 1;
+            animation: runeGlow 2s infinite alternate;
+        }
+        
+        @keyframes runeGlow {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+        
+        /* Card 16: Cyber Kraken */
+        .card-16 .card-front {
+            background: linear-gradient(45deg, #000046, #1CB5E0);
+        }
+        
+        .card-16 .card-title {
+            color: #00bfff;
+            text-shadow: 0 0 5px #00bfff;
+        }
+        
+        .card-16::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%2300bfff" stroke-width="1"/><path d="M50,10 Q70,30 50,50 Q30,30 50,10 Z" fill="none" stroke="%2300bfff" stroke-width="1"/></svg>');
+            background-size: 100% 100%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            animation: krakenPulse 3s infinite;
+        }
+        
+        @keyframes krakenPulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+        }
+        
+        /* Card 17: Solar Flare Paladin */
+        .card-17 .card-front {
+            background: linear-gradient(45deg, #f46b45, #eea849);
+        }
+        
+        .card-17 .card-title {
+            color: #ffff00;
+            text-shadow: 0 0 5px #ffff00;
+        }
+        
+        .card-17::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #ffff00, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            animation: solarFlare 3s infinite;
+        }
+        
+        @keyframes solarFlare {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+        }
+        
+        /* Card 18: Necroshade */
+        .card-18 .card-front {
+            background: linear-gradient(45deg, #000000, #434343);
+        }
+        
+        .card-18 .card-title {
+            color: #9400d3;
+            text-shadow: 0 0 5px #9400d3;
+        }
+        
+        .card-18::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: linear-gradient(to top, rgba(148,0,211,0.5), transparent);
+            animation: necroRise 4s infinite;
+        }
+        
+        @keyframes necroRise {
+            0% { height: 20px; opacity: 0; }
+            50% { height: 50px; opacity: 0.7; }
+            100% { height: 20px; opacity: 0; }
+        }
+        
+        /* Card 19: Zero Gravity Ronin */
+        .card-19 .card-front {
+            background: linear-gradient(45deg, #000000, #0f3460);
+        }
+        
+        .card-19 .card-title {
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff;
+        }
+        
+        .card-19::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%2300ffff"/><circle cx="80" cy="30" r="3" fill="%2300ffff"/><circle cx="50" cy="70" r="2" fill="%2300ffff"/><circle cx="70" cy="80" r="3" fill="%2300ffff"/></svg>');
+            background-size: 100% 100%;
+            z-index: 1;
+            animation: spaceFloat 20s infinite linear;
+        }
+        
+        @keyframes spaceFloat {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Card 20: Obsidian Executioner */
+        .card-20 .card-front {
+            background: linear-gradient(45deg, #000000, #232526);
+        }
+        
+        .card-20 .card-title {
+            color: #ff0000;
+            text-shadow: 0 0 5px #ff0000;
+        }
+        
+        .card-20::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 L80,80 M80,20 L20,80" stroke="%23ff0000" stroke-width="3"/></svg>');
+            background-size: 100% 100%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            animation: executionerPulse 2s infinite;
+        }
+        
+        @keyframes executionerPulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Card 1: Inferno Blade -->
+    <div class="card-container">
+        <div class="card card-1">
+            <div class="card-front">
+                <div class="card-title">Inferno Blade</div>
+                <div class="card-desc">Flaming sword cuts through darkness</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 2: Neon Reaper -->
+    <div class="card-container">
+        <div class="card card-2">
+            <div class="card-front">
+                <div class="card-title">Neon Reaper</div>
+                <div class="card-desc">Cyberpunk death incarnate</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 3: Thunder Warlord -->
+    <div class="card-container">
+        <div class="card card-3">
+            <div class="card-front">
+                <div class="card-title">Thunder Warlord</div>
+                <div class="card-desc">Master of storm and steel</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 4: Void Phantom -->
+    <div class="card-container">
+        <div class="card card-4">
+            <div class="card-front">
+                <div class="card-title">Void Phantom</div>
+                <div class="card-desc">The abyss given form</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 5: Blood Moon Assassin -->
+    <div class="card-container">
+        <div class="card card-5">
+            <div class="card-front">
+                <div class="card-title">Blood Moon Assassin</div>
+                <div class="card-desc">Strikes when the moon weeps</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 6: Dragon Overlord -->
+    <div class="card-container">
+        <div class="card card-6">
+            <div class="card-front">
+                <div class="card-title">Dragon Overlord</div>
+                <div class="card-desc">Ancient power awakened</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 7: Cybernetic Samurai -->
+    <div class="card-container">
+        <div class="card card-7">
+            <div class="card-front">
+                <div class="card-title">Cybernetic Samurai</div>
+                <div class="card-desc">Blade meets circuitry</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 8: Abyssal Leviathan -->
+    <div class="card-container">
+        <div class="card card-8">
+            <div class="card-front">
+                <div class="card-title">Abyssal Leviathan</div>
+                <div class="card-desc">Terror from the deep</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 9: Phoenix Emperor -->
+    <div class="card-container">
+        <div class="card card-9">
+            <div class="card-front">
+                <div class="card-title">Phoenix Emperor</div>
+                <div class="card-desc">Reborn in eternal fire</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 10: Doombringer -->
+    <div class="card-container">
+        <div class="card card-10">
+            <div class="card-front">
+                <div class="card-title">Doombringer</div>
+                <div class="card-desc">Herald of the end times</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 11: Steel Titan -->
+    <div class="card-container">
+        <div class="card card-11">
+            <div class="card-front">
+                <div class="card-title">Steel Titan</div>
+                <div class="card-desc">Unstoppable war machine</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 12: Spectre Gunslinger -->
+    <div class="card-container">
+        <div class="card card-12">
+            <div class="card-front">
+                <div class="card-title">Spectre Gunslinger</div>
+                <div class="card-desc">Ghost with a smoking gun</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 13: Celestial Harbinger -->
+    <div class="card-container">
+        <div class="card card-13">
+            <div class="card-front">
+                <div class="card-title">Celestial Harbinger</div>
+                <div class="card-desc">Messenger of the cosmos</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 14: Plague Doctor -->
+    <div class="card-container">
+        <div class="card card-14">
+            <div class="card-front">
+                <div class="card-title">Plague Doctor</div>
+                <div class="card-desc">Pestilence in human form</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 15: Rune Berserker -->
+    <div class="card-container">
+        <div class="card card-15">
+            <div class="card-front">
+                <div class="card-title">Rune Berserker</div>
+                <div class="card-desc">Ancient magic fuels his rage</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 16: Cyber Kraken -->
+    <div class="card-container">
+        <div class="card card-16">
+            <div class="card-front">
+                <div class="card-title">Cyber Kraken</div>
+                <div class="card-desc">Machine-enhanced terror</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 17: Solar Flare Paladin -->
+    <div class="card-container">
+        <div class="card card-17">
+            <div class="card-front">
+                <div class="card-title">Solar Flare Paladin</div>
+                <div class="card-desc">Holy warrior of the sun</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 18: Necroshade -->
+    <div class="card-container">
+        <div class="card card-18">
+            <div class="card-front">
+                <div class="card-title">Necroshade</div>
+                <div class="card-desc">Death walks in shadow</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 19: Zero Gravity Ronin -->
+    <div class="card-container">
+        <div class="card card-19">
+            <div class="card-front">
+                <div class="card-title">Zero Gravity Ronin</div>
+                <div class="card-desc">Masterless in the void</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card 20: Obsidian Executioner -->
+    <div class="card-container">
+        <div class="card card-20">
+            <div class="card-front">
+                <div class="card-title">Obsidian Executioner</div>
+                <div class="card-desc">The final blade falls</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add slight random rotation on hover for more dynamic effect
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateY(0) rotateX(0)';
+            });
+        });
+    </script>
+</body>
+</html>

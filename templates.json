@@ -262,5 +262,51 @@
             "JavaScript",
             "CSS Animations"
         ]
+    },
+    {
+        "id": "components-cards-01",
+        "title": "Badass Animated Cards Pack",
+        "description": "A collection of 20 high-impact animated cards with unique designs and intense animations. Each card features different themes like cyberpunk, fantasy, and sci-fi with fire, lightning, neon, and particle effects.",
+        "category": "components",
+        "thumbnail": "templates/Preview/components/cards/1.png",
+        "previewUrl": "templates/Preview/components/cards/1.html",
+        "downloadUrl": "templates/Download/components/cards.zip",
+        "tags": [
+            "Animated",
+            "Gaming",
+            "Fantasy",
+            "Cyberpunk",
+            "High-Impact"
+        ],
+        "tech": [
+            "HTML",
+            "CSS",
+            "SVG",
+            "CSS Animations",
+            "3D Transforms"
+        ]
+    },
+    {
+        "id": "components-cards-02",
+        "title": "Professional Tech Cards Pack",
+        "description": "20 clean, modern card components designed for corporate websites and SaaS products. Features subtle animations, professional color schemes, and tech industry themes like AI, Cloud Computing, and Cybersecurity.",
+        "category": "components",
+        "thumbnail": "templates/Preview/components/cards/2.png",
+        "previewUrl": "templates/Preview/components/cards/2.html",
+        "downloadUrl": "templates/Download/components/cards.zip",
+        "tags": [
+            "Corporate",
+            "SaaS",
+            "Technology",
+            "Minimal",
+            "Business"
+        ],
+        "tech": [
+            "HTML",
+            "CSS",
+            "Flexbox",
+            "CSS Grid",
+            "Intersection Observer"
+        ]
     }
 ]

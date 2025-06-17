@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Animated Cards</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --card-width: 280px;
+            --card-height: 380px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #f8f9fa;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 1fr));
+            gap: 24px;
+            padding: 2rem;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            position: relative;
+            width: 100%;
+            height: var(--card-height);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: white;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+        }
+        
+        .card-content {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            z-index: 2;
+        }
+        
+        .card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #212529;
+        }
+        
+        .card-desc {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            color: #495057;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-link {
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #0d6efd;
+            text-decoration: none;
+        }
+        
+        .card-link svg {
+            margin-left: 6px;
+            transition: transform 0.2s ease;
+        }
+        
+        .card:hover .card-link svg {
+            transform: translateX(3px);
+        }
+        
+        /* ----- Card 1: Data Analytics ----- */
+        .card-1 .card-icon {
+            background: rgba(13, 110, 253, 0.1);
+            color: #0d6efd;
+        }
+        
+        .card-1 .card-bg {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            opacity: 0.8;
+        }
+        
+        .card-1::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="30" cy="50" r="20" fill="none" stroke="%230d6efd" stroke-width="1" stroke-opacity="0.2"/><circle cx="50" cy="50" r="15" fill="none" stroke="%230d6efd" stroke-width="1" stroke-opacity="0.2"/><circle cx="70" cy="50" r="25" fill="none" stroke="%230d6efd" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 200% 200%;
+            animation: card1Anim 12s linear infinite;
+        }
+        
+        @keyframes card1Anim {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+        
+        /* ----- Card 2: Cloud Computing ----- */
+        .card-2 .card-icon {
+            background: rgba(111, 66, 193, 0.1);
+            color: #6f42c1;
+        }
+        
+        .card-2 .card-bg {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+        }
+        
+        .card-2::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="60" viewBox="0 0 100 60"><path d="M20,30 Q30,15 50,15 Q70,15 80,30 Q90,25 95,30 L95,40 Q90,45 80,40 Q70,50 50,50 Q30,50 20,40 Q10,35 5,40 L5,30 Q10,25 20,30 Z" fill="none" stroke="%236f42c1" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 200% 100%;
+            animation: card2Anim 8s linear infinite;
+        }
+        
+        @keyframes card2Anim {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+        
+        /* ----- Card 3: Cybersecurity ----- */
+        .card-3 .card-icon {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+        
+        .card-3 .card-bg {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+        }
+        
+        .card-3::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect x="20" y="30" width="60" height="40" rx="5" fill="none" stroke="%23dc3545" stroke-width="1" stroke-opacity="0.2"/><circle cx="50" cy="50" r="15" fill="none" stroke="%23dc3545" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 100% 100%;
+            animation: card3Anim 5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes card3Anim {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.6; }
+        }
+        
+        /* ----- Card 4: AI & ML ----- */
+        .card-4 .card-icon {
+            background: rgba(253, 126, 20, 0.1);
+            color: #fd7e14;
+        }
+        
+        .card-4 .card-bg {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+        }
+        
+        .card-4::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M30,50 L50,30 L70,50 L50,70 Z" fill="none" stroke="%23fd7e14" stroke-width="1" stroke-opacity="0.2"/><circle cx="50" cy="50" r="20" fill="none" stroke="%23fd7e14" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 100% 100%;
+            animation: card4Anim 8s linear infinite;
+        }
+        
+        @keyframes card4Anim {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* ----- Card 5: DevOps ----- */
+        .card-5 .card-icon {
+            background: rgba(32, 201, 151, 0.1);
+            color: #20c997;
+        }
+        
+        .card-5 .card-bg {
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+        }
+        
+        .card-5::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M20,50 L50,20 L80,50 L50,80 Z" fill="none" stroke="%2320c997" stroke-width="1" stroke-opacity="0.2"/><circle cx="50" cy="50" r="15" fill="none" stroke="%2320c997" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 100% 100%;
+            animation: card5Anim 6s ease-in-out infinite alternate;
+        }
+        
+        @keyframes card5Anim {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        /* ----- Card 6: IoT ----- */
+        .card-6 .card-icon {
+            background: rgba(13, 202, 240, 0.1);
+            color: #0dcaf0;
+        }
+        
+        .card-6 .card-bg {
+            background: linear-gradient(135deg, #e1f5fe, #b3e5fc);
+        }
+        
+        .card-6::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="30" cy="30" r="10" fill="none" stroke="%230dcaf0" stroke-width="1" stroke-opacity="0.2"/><circle cx="70" cy="30" r="10" fill="none" stroke="%230dcaf0" stroke-width="1" stroke-opacity="0.2"/><circle cx="30" cy="70" r="10" fill="none" stroke="%230dcaf0" stroke-width="1" stroke-opacity="0.2"/><circle cx="70" cy="70" r="10" fill="none" stroke="%230dcaf0" stroke-width="1" stroke-opacity="0.2"/><path d="M30,30 L70,70 M70,30 L30,70" stroke="%230dcaf0" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 100% 100%;
+            animation: card6Anim 8s linear infinite;
+        }
+        
+        @keyframes card6Anim {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* ----- Card 7: Blockchain ----- */
+        .card-7 .card-icon {
+            background: rgba(108, 117, 125, 0.1);
+            color: #6c757d;
+        }
+        
+        .card-7 .card-bg {
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+        }
+        
+        .card-7::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect x="20" y="30" width="60" height="10" rx="2" fill="none" stroke="%236c757d" stroke-width="1" stroke-opacity="0.2"/><rect x="20" y="50" width="60" height="10" rx="2" fill="none" stroke="%236c757d" stroke-width="1" stroke-opacity="0.2"/><rect x="20" y="70" width="60" height="10" rx="2" fill="none" stroke="%236c757d" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 100% 100%;
+            animation: card7Anim 5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes card7Anim {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        
+        /* ----- Card 8: AR/VR ----- */
+        .card-8 .card-icon {
+            background: rgba(214, 51, 132, 0.1);
+            color: #d63384;
+        }
+        
+        .card-8 .card-bg {
+            background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+        }
+        
+        .card-8::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="none" stroke="%23d63384" stroke-width="1" stroke-opacity="0.2"/><circle cx="50" cy="50" r="20" fill="none" stroke="%23d63384" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 100% 100%;
+            animation: card8Anim 6s ease-in-out infinite alternate;
+        }
+        
+        @keyframes card8Anim {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        
+        /* ----- Card 9: Quantum Computing ----- */
+        .card-9 .card-icon {
+            background: rgba(32, 107, 196, 0.1);
+            color: #206bc4;
+        }
+        
+        .card-9 .card-bg {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        }
+        
+        .card-9::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M20,20 L80,80 M80,20 L20,80" stroke="%23206bc4" stroke-width="1" stroke-opacity="0.2"/><circle cx="50" cy="50" r="30" fill="none" stroke="%23206bc4" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 100% 100%;
+            animation: card9Anim 8s linear infinite;
+        }
+        
+        @keyframes card9Anim {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* ----- Card 10: 5G Technology ----- */
+        .card-10 .card-icon {
+            background: rgba(102, 16, 242, 0.1);
+            color: #6610f2;
+        }
+        
+        .card-10 .card-bg {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+        }
+        
+        .card-10::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M10,50 L30,30 L50,70 L70,30 L90,50" fill="none" stroke="%236610f2" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 200% 100%;
+            animation: card10Anim 5s linear infinite;
+        }
+        
+        @keyframes card10Anim {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+        
+        /* ----- Card 11: Edge Computing ----- */
+        .card-11 .card-icon {
+            background: rgba(214, 158, 46, 0.1);
+            color: #d69e2e;
+        }
+        
+        .card-11 .card-bg {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+        }
+        
+        .card-11::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="20" r="10" fill="none" stroke="%23d69e2e" stroke-width="1" stroke-opacity="0.2"/><circle cx="80" cy="20" r="10" fill="none" stroke="%23d69e2e" stroke-width="1" stroke-opacity="0.2"/><circle cx="20" cy="80" r="10" fill="none" stroke="%23d69e2e" stroke-width="1" stroke-opacity="0.2"/><circle cx="80" cy="80" r="10" fill="none" stroke="%23d69e2e" stroke-width="1" stroke-opacity="0.2"/><circle cx="50" cy="50" r="20" fill="none" stroke="%23d69e2e" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 100% 100%;
+            animation: card11Anim 8s ease-in-out infinite alternate;
+        }
+        
+        @keyframes card11Anim {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        /* ----- Card 12: Digital Twin ----- */
+        .card-12 .card-icon {
+            background: rgba(41, 182, 246, 0.1);
+            color: #29b6f6;
+        }
+        
+        .card-12 .card-bg {
+            background: linear-gradient(135deg, #e1f5fe, #b3e5fc);
+        }
+        
+        .card-12::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect x="20" y="20" width="25" height="60" rx="2" fill="none" stroke="%2329b6f6" stroke-width="1" stroke-opacity="0.2"/><rect x="55" y="20" width="25" height="60" rx="2" fill="none" stroke="%2329b6f6" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 100% 100%;
+            animation: card12Anim 6s ease-in-out infinite alternate;
+        }
+        
+        @keyframes card12Anim {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.6; }
+        }
+        
+        /* ----- Card 13: Robotic Process Automation ----- */
+        .card-13 .card-icon {
+            background: rgba(24, 162, 184, 0.1);
+            color: #18a2b8;
+        }
+        
+        .card-13 .card-bg {
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+        }
+        
+        .card-13::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="40" r="15" fill="none" stroke="%2318a2b8" stroke-width="1" stroke-opacity="0.2"/><rect x="35" y="55" width="30" height="30" rx="5" fill="none" stroke="%2318a2b8" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 100% 100%;
+            animation: card13Anim 8s linear infinite;
+        }
+        
+        @keyframes card13Anim {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* ----- Card 14: Metaverse ----- */
+        .card-14 .card-icon {
+            background: rgba(123, 31, 162, 0.1);
+            color: #7b1fa2;
+        }
+        
+        .card-14 .card-bg {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+        }
+        
+        .card-14::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50,10 L90,50 L50,90 L10,50 Z" fill="none" stroke="%237b1fa2" stroke-width="1" stroke-opacity="0.2"/><circle cx="50" cy="50" r="30" fill="none" stroke="%237b1fa2" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 100% 100%;
+            animation: card14Anim 6s ease-in-out infinite alternate;
+        }
+        
+        @keyframes card14Anim {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        /* ----- Card 15: Web3 ----- */
+        .card-15 .card-icon {
+            background: rgba(0, 123, 255, 0.1);
+            color: #007bff;
+        }
+        
+        .card-15 .card-bg {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        }
+        
+        .card-15::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50,10 L80,80 L20,80 Z" fill="none" stroke="%23007bff" stroke-width="1" stroke-opacity="0.2"/><circle cx="50" cy="50" r="30" fill="none" stroke="%23007bff" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 100% 100%;
+            animation: card15Anim 8s linear infinite;
+        }
+        
+        @keyframes card15Anim {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* ----- Card 16: Cybersecurity ----- */
+        .card-16 .card-icon {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+        
+        .card-16 .card-bg {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+        }
+        
+        .card-16::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect x="20" y="30" width="60" height="40" rx="5" fill="none" stroke="%23dc3545" stroke-width="1" stroke-opacity="0.2"/><circle cx="50" cy="50" r="15" fill="none" stroke="%23dc3545" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 100% 100%;
+            animation: card16Anim 5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes card16Anim {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.6; }
+        }
+        
+        /* ----- Card 17: Quantum Computing ----- */
+        .card-17 .card-icon {
+            background: rgba(32, 107, 196, 0.1);
+            color: #206bc4;
+        }
+        
+        .card-17 .card-bg {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        }
+        
+        .card-17::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M20,20 L80,80 M80,20 L20,80" stroke="%23206bc4" stroke-width="1" stroke-opacity="0.2"/><circle cx="50" cy="50" r="30" fill="none" stroke="%23206bc4" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 100% 100%;
+            animation: card17Anim 8s linear infinite;
+        }
+        
+        @keyframes card17Anim {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* ----- Card 18: 5G Technology ----- */
+        .card-18 .card-icon {
+            background: rgba(102, 16, 242, 0.1);
+            color: #6610f2;
+        }
+        
+        .card-18 .card-bg {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+        }
+        
+        .card-18::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M10,50 L30,30 L50,70 L70,30 L90,50" fill="none" stroke="%236610f2" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 200% 100%;
+            animation: card18Anim 5s linear infinite;
+        }
+        
+        @keyframes card18Anim {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+        
+        /* ----- Card 19: Edge Computing ----- */
+        .card-19 .card-icon {
+            background: rgba(214, 158, 46, 0.1);
+            color: #d69e2e;
+        }
+        
+        .card-19 .card-bg {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+        }
+        
+        .card-19::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="20" r="10" fill="none" stroke="%23d69e2e" stroke-width="1" stroke-opacity="0.2"/><circle cx="80" cy="20" r="10" fill="none" stroke="%23d69e2e" stroke-width="1" stroke-opacity="0.2"/><circle cx="20" cy="80" r="10" fill="none" stroke="%23d69e2e" stroke-width="1" stroke-opacity="0.2"/><circle cx="80" cy="80" r="10" fill="none" stroke="%23d69e2e" stroke-width="1" stroke-opacity="0.2"/><circle cx="50" cy="50" r="20" fill="none" stroke="%23d69e2e" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 100% 100%;
+            animation: card19Anim 8s ease-in-out infinite alternate;
+        }
+        
+        @keyframes card19Anim {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        /* ----- Card 20: Digital Twin ----- */
+        .card-20 .card-icon {
+            background: rgba(41, 182, 246, 0.1);
+            color: #29b6f6;
+        }
+        
+        .card-20 .card-bg {
+            background: linear-gradient(135deg, #e1f5fe, #b3e5fc);
+        }
+        
+        .card-20::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect x="20" y="20" width="25" height="60" rx="2" fill="none" stroke="%2329b6f6" stroke-width="1" stroke-opacity="0.2"/><rect x="55" y="20" width="25" height="60" rx="2" fill="none" stroke="%2329b6f6" stroke-width="1" stroke-opacity="0.2"/></svg>');
+            background-size: 100% 100%;
+            animation: card20Anim 6s ease-in-out infinite alternate;
+        }
+        
+        @keyframes card20Anim {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Card 1: Data Analytics -->
+    <div class="card card-1">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">📊</div>
+            <h3 class="card-title">Data Analytics</h3>
+            <p class="card-desc">Transform raw data into actionable insights with our advanced analytics platform.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 2: Cloud Computing -->
+    <div class="card card-2">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">☁️</div>
+            <h3 class="card-title">Cloud Computing</h3>
+            <p class="card-desc">Scalable, secure cloud solutions tailored to your business needs.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 3: Cybersecurity -->
+    <div class="card card-3">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">🔒</div>
+            <h3 class="card-title">Cybersecurity</h3>
+            <p class="card-desc">Protect your digital assets with our comprehensive security solutions.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 4: AI & ML -->
+    <div class="card card-4">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">🤖</div>
+            <h3 class="card-title">AI & ML</h3>
+            <p class="card-desc">Leverage artificial intelligence to automate and optimize processes.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 5: DevOps -->
+    <div class="card card-5">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">🔄</div>
+            <h3 class="card-title">DevOps</h3>
+            <p class="card-desc">Streamline development and operations with CI/CD pipelines.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 6: IoT -->
+    <div class="card card-6">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">🌐</div>
+            <h3 class="card-title">IoT</h3>
+            <p class="card-desc">Connect and manage devices with our Internet of Things platform.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 7: Blockchain -->
+    <div class="card card-7">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">⛓️</div>
+            <h3 class="card-title">Blockchain</h3>
+            <p class="card-desc">Secure, decentralized solutions for your business needs.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 8: AR/VR -->
+    <div class="card card-8">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">👓</div>
+            <h3 class="card-title">AR/VR</h3>
+            <p class="card-desc">Immersive experiences for training, marketing, and entertainment.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 9: Quantum Computing -->
+    <div class="card card-9">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">⚛️</div>
+            <h3 class="card-title">Quantum Computing</h3>
+            <p class="card-desc">Explore the next frontier of computational power.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 10: 5G Technology -->
+    <div class="card card-10">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">📶</div>
+            <h3 class="card-title">5G Technology</h3>
+            <p class="card-desc">Ultra-fast connectivity solutions for the modern enterprise.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 11: Edge Computing -->
+    <div class="card card-11">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">🔌</div>
+            <h3 class="card-title">Edge Computing</h3>
+            <p class="card-desc">Process data closer to the source for faster insights.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 12: Digital Twin -->
+    <div class="card card-12">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">👥</div>
+            <h3 class="card-title">Digital Twin</h3>
+            <p class="card-desc">Virtual replicas for simulation, analysis, and control.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 13: Robotic Process Automation -->
+    <div class="card card-13">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">🤖</div>
+            <h3 class="card-title">RPA</h3>
+            <p class="card-desc">Automate repetitive tasks with robotic process automation.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 14: Metaverse -->
+    <div class="card card-14">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">🌌</div>
+            <h3 class="card-title">Metaverse</h3>
+            <p class="card-desc">Build immersive virtual worlds for your customers.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 15: Web3 -->
+    <div class="card card-15">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">🕸️</div>
+            <h3 class="card-title">Web3</h3>
+            <p class="card-desc">Decentralized applications for the next generation web.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 16: Cybersecurity -->
+    <div class="card card-16">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">🛡️</div>
+            <h3 class="card-title">Cybersecurity</h3>
+            <p class="card-desc">Comprehensive protection against digital threats.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 17: Quantum Computing -->
+    <div class="card card-17">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">🧮</div>
+            <h3 class="card-title">Quantum Computing</h3>
+            <p class="card-desc">Solve complex problems with quantum algorithms.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 18: 5G Technology -->
+    <div class="card card-18">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">🚀</div>
+            <h3 class="card-title">5G Technology</h3>
+            <p class="card-desc">Next-generation wireless connectivity solutions.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 19: Edge Computing -->
+    <div class="card card-19">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">🖥️</div>
+            <h3 class="card-title">Edge Computing</h3>
+            <p class="card-desc">Distributed computing for real-time processing.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+    
+    <!-- Card 20: Digital Twin -->
+    <div class="card card-20">
+        <div class="card-bg"></div>
+        <div class="card-content">
+            <div class="card-icon">👯</div>
+            <h3 class="card-title">Digital Twin</h3>
+            <p class="card-desc">Virtual models for simulation and analysis.</p>
+            <a href="#" class="card-link">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+
+    <script>
+        // Add intersection observer for animations
+        const cards = document.querySelectorAll('.card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        cards.forEach(card => {
+            observer.observe(card);
+        });
+        
+        // Add click effect
+        cards.forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
